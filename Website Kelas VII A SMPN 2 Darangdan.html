@@ -1,0 +1,2670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Resmi Kelas VII A - SMPN 2 Darangdan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            500: '#334e68',
+                            800: '#102a43',
+                            900: '#0b1b2b',
+                            950: '#06101a',
+                        },
+                        skycustom: {
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.04)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-dark {
+            background: rgba(11, 27, 43, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 30%, #102a43 0%, #0b1b2b 60%, #06101a 100%);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-skycustom-500 selection:text-white min-h-screen flex flex-col transition-colors duration-300">
+
+    <div id="landingView" class="relative min-h-screen hero-gradient text-white flex flex-col justify-between overflow-hidden z-20 transition-opacity duration-500">
+        <!-- Canvas Background Effect -->
+        <canvas id="particlesCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
+        
+        <!-- Animated Glowing Orbs -->
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-skycustom-500/20 rounded-full blur-3xl animate-pulse-glow pointer-events-none"></div>
+        <div class="absolute bottom-10 -right-20 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl animate-pulse-glow pointer-events-none" style="animation-delay: 1.5s;"></div>
+
+        <!-- Landing Header -->
+        <header class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateToMainApp('beranda')">
+                <div class="w-11 h-11 bg-gradient-to-tr from-skycustom-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-skycustom-500/30 ring-2 ring-white/20">
+                    <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white block leading-tight">VII A <span class="text-skycustom-400">SMPN 2 Darangdan</span></span>
+                    <span class="text-xs text-slate-300">Tahun Ajaran 2026–2027</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-yellow-300 dark:text-skycustom-300 backdrop-blur-md transition-all flex items-center justify-center" title="Beralih Mode Terang/Gelap">
+                    <i id="themeIconLanding" class="fa-solid fa-moon text-base"></i>
+                </button>
+
+                <button onclick="openAdminModalFromLanding()" class="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-200 bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl backdrop-blur-md transition-all duration-300 flex items-center space-x-2 group hover:shadow-lg hover:shadow-white/5">
+                    <i class="fa-solid fa-user-gear text-skycustom-400 group-hover:rotate-45 transition-transform duration-300"></i>
+                    <span>Portal Admin</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center my-auto py-10 flex flex-col items-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-dark text-skycustom-400 border border-skycustom-500/30 mb-8 animate-float shadow-xl">
+                <span class="w-2 h-2 rounded-full bg-skycustom-400 animate-ping"></span>
+                <span class="text-xs sm:text-sm font-medium tracking-wide">Selamat Datang di Portal Resmi Kelas VII A</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                Selamat Datang di Website <br class="hidden sm:inline"/>
+                <span class="bg-gradient-to-r from-skycustom-400 via-blue-300 to-indigo-300 bg-clip-text text-transparent">Kelas VII A</span>
+            </h1>
+
+            <p class="text-lg sm:text-2xl font-light text-slate-200 max-w-3xl mb-2 leading-relaxed">
+                SMPN 2 Darangdan &bull; <span class="font-semibold text-white">Tahun Ajaran 2026–2027</span>
+            </p>
+            <p id="landingSlogan" class="text-base sm:text-lg font-medium text-skycustom-400 italic mb-10 tracking-wide">
+                "Satu Kelas, Satu Cerita, Sejuta Kenangan"
+            </p>
+
+            <div class="mb-12">
+                <button onclick="navigateToMainApp('beranda')" class="group relative inline-flex items-center justify-center px-8 py-4 text-base sm:text-lg font-bold text-white bg-gradient-to-r from-skycustom-500 to-blue-600 rounded-2xl shadow-2xl shadow-skycustom-500/40 hover:shadow-skycustom-500/60 transform hover:-translate-y-1 active:translate-y-0 transition-all duration-300 overflow-hidden ring-4 ring-white/10">
+                    <span class="relative flex items-center space-x-3">
+                        <span>Jelajahi Kelas VII A</span>
+                        <i class="fa-solid fa-arrow-right text-skycustom-200 group-hover:translate-x-1 transition-transform"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="w-full max-w-3xl">
+                <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">Akses Cepat Pintas</p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <button onclick="navigateToMainApp('jadwal')" class="glass-dark hover:bg-white/10 border border-white/10 p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-left flex items-center space-x-3 group">
+                        <div class="w-10 h-10 rounded-xl bg-skycustom-500/20 text-skycustom-400 flex items-center justify-center group-hover:bg-skycustom-500 group-hover:text-white transition-all shrink-0">
+                            <i class="fa-solid fa-calendar-days text-base"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xs font-bold text-white group-hover:text-skycustom-400 transition-colors">Jadwal</h2>
+                            <p class="text-[10px] text-slate-400">Pelajaran Kelas</p>
+                        </div>
+                    </button>
+
+                    <button onclick="navigateToMainApp('siswa')" class="glass-dark hover:bg-white/10 border border-white/10 p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-left flex items-center space-x-3 group">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-all shrink-0">
+                            <i class="fa-solid fa-medal text-base"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">Profil & Lencana</h2>
+                            <p class="text-[10px] text-slate-400">Poin Apresiasi Siswa</p>
+                        </div>
+                    </button>
+
+                    <button onclick="navigateToMainApp('quiz')" class="glass-dark hover:bg-white/10 border border-white/10 p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-left flex items-center space-x-3 group">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0">
+                            <i class="fa-solid fa-gamepad text-base"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Fun Quiz</h2>
+                            <p class="text-[10px] text-slate-400">Kuis Seru Kelas</p>
+                        </div>
+                    </button>
+
+                    <button onclick="navigateToMainApp('album')" class="glass-dark hover:bg-white/10 border border-white/10 p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-left flex items-center space-x-3 group">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all shrink-0">
+                            <i class="fa-solid fa-images text-base"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">Album</h2>
+                            <p class="text-[10px] text-slate-400">Foto & Video</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="relative z-10 border-t border-white/10 py-6 text-center text-xs text-slate-400 space-y-3">
+            <div class="flex justify-center items-center space-x-4">
+                <a href="https://www.tiktok.com/@class_vii.a_67?_r=1&_t=ZS-9APbZtfZbuB" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all border border-white/10">
+                    <i class="fa-brands fa-tiktok text-sm"></i>
+                    <span>TikTok VII A</span>
+                </a>
+                <a href="https://www.instagram.com/official_class_7a_?cplk=MWZicGlkOGNtcGhidw==&utm_source=ig_contact_invite" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all border border-white/10">
+                    <i class="fa-brands fa-instagram text-sm text-pink-400"></i>
+                    <span>Instagram VII A</span>
+                </a>
+            </div>
+            <p>&copy; 2026 SMPN 2 Darangdan - Kelas VII A. Dikelola bersama dengan penuh semangat.</p>
+        </footer>
+    </div>
+
+    <div id="mainAppView" class="hidden min-h-screen flex flex-col transition-opacity duration-500 opacity-0">
+        <!-- Main Navbar Header -->
+        <header class="sticky top-0 z-40 bg-navy-900/95 dark:bg-slate-900/95 backdrop-blur-md text-white border-b border-navy-800 dark:border-slate-800 shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    
+                    <div class="flex items-center space-x-3 cursor-pointer" onclick="showLandingPage()">
+                        <div class="w-10 h-10 bg-skycustom-500 rounded-xl flex items-center justify-center shadow-md shadow-skycustom-500/30">
+                            <i class="fa-solid fa-graduation-cap text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-lg tracking-tight block leading-tight">VII A <span class="text-skycustom-400">SMPN 2 Darangdan</span></span>
+                            <span class="text-xs text-slate-300 font-normal">T.A. 2026–2027</span>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Bar -->
+                    <nav class="hidden lg:flex items-center space-x-1">
+                        <button onclick="showLandingPage()" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-navy-800 dark:hover:bg-slate-800 transition-colors flex items-center space-x-1.5">
+                            <i class="fa-solid fa-house-chimney text-skycustom-400"></i>
+                            <span>Landing Page</span>
+                        </button>
+                        <div class="h-4 w-px bg-navy-800 dark:bg-slate-800 mx-1"></div>
+                        <button onclick="switchTab('beranda')" id="nav-beranda" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all">Beranda</button>
+                        <button onclick="switchTab('profil')" id="nav-profil" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all">Profil Kelas</button>
+                        <button onclick="switchTab('jadwal')" id="nav-jadwal" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all">Jadwal Pelajaran</button>
+                        <button onclick="switchTab('organisasi')" id="nav-organisasi" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all">Struktur Organisasi</button>
+                        <button onclick="switchTab('siswa')" id="nav-siswa" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center space-x-1">
+                            <i class="fa-solid fa-medal text-amber-400"></i>
+                            <span>Siswa & Lencana</span>
+                        </button>
+                        <button onclick="switchTab('quiz')" id="nav-quiz" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center space-x-1">
+                            <i class="fa-solid fa-gamepad text-purple-400"></i>
+                            <span>Fun Quiz</span>
+                        </button>
+                        <button onclick="switchTab('album')" id="nav-album" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all">Album Kenangan</button>
+                        <button onclick="switchTab('aspirasi')" id="nav-aspirasi" class="nav-btn px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center space-x-1">
+                            <i class="fa-solid fa-box-archive text-amber-400"></i>
+                            <span>Kotak Aspirasi</span>
+                        </button>
+                    </nav>
+
+                    <!-- Auth Badge, Dark Toggle & Admin Trigger -->
+                    <div class="hidden md:flex items-center space-x-3">
+                        <!-- Dark / Light Switcher Button -->
+                        <button onclick="toggleTheme()" class="px-3 py-2 rounded-xl bg-navy-800 dark:bg-slate-800 hover:bg-navy-700 text-amber-400 dark:text-skycustom-300 transition-all text-xs font-bold flex items-center space-x-2 border border-navy-700 dark:border-slate-700" title="Sakelar Mode Terang/Gelap">
+                            <i id="themeIconNav" class="fa-solid fa-moon"></i>
+                            <span id="themeLabelNav" class="text-[11px] text-slate-200">Dark Mode</span>
+                        </button>
+
+                        <div id="adminBadge" class="hidden items-center bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
+                            Admin Active
+                        </div>
+                        <button id="authBtn" onclick="openAuthModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-skycustom-500 hover:bg-skycustom-600 text-white shadow-md shadow-skycustom-500/20 transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-lock"></i>
+                            <span id="authBtnText">Login Admin</span>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="lg:hidden flex items-center space-x-2">
+                        <button onclick="toggleTheme()" class="p-2 text-amber-400 dark:text-skycustom-300 focus:outline-none">
+                            <i id="themeIconMobileHeader" class="fa-solid fa-moon text-lg"></i>
+                        </button>
+                        <button onclick="toggleMobileMenu()" class="text-slate-300 hover:text-white p-2 rounded-lg focus:outline-none">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mobileMenu" class="hidden lg:hidden bg-navy-950 dark:bg-slate-950 border-b border-navy-800 dark:border-slate-800 px-4 pt-2 pb-6 space-y-2">
+                <button onclick="showLandingPage(); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-skycustom-400 hover:bg-navy-800 dark:hover:bg-slate-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-house-chimney"></i>
+                    <span>Kembali ke Landing Page</span>
+                </button>
+                <div class="border-t border-navy-800 dark:border-slate-800 my-1"></div>
+                <button onclick="switchTab('beranda'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-navy-800 dark:hover:bg-slate-800">Beranda</button>
+                <button onclick="switchTab('profil'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-navy-800 dark:hover:bg-slate-800">Profil Kelas</button>
+                <button onclick="switchTab('jadwal'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-navy-800 dark:hover:bg-slate-800">Jadwal Pelajaran</button>
+                <button onclick="switchTab('organisasi'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-navy-800 dark:hover:bg-slate-800">Struktur Organisasi</button>
+                <button onclick="switchTab('siswa'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-amber-300 hover:bg-navy-800 dark:hover:bg-slate-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-medal"></i>
+                    <span>Daftar Siswa & Lencana</span>
+                </button>
+                <button onclick="switchTab('quiz'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-purple-300 hover:bg-navy-800 dark:hover:bg-slate-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>Fun Quiz Kelas</span>
+                </button>
+                <button onclick="switchTab('album'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-navy-800 dark:hover:bg-slate-800">Album Kenangan</button>
+                <button onclick="switchTab('aspirasi'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-amber-300 hover:bg-navy-800 dark:hover:bg-slate-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-box-archive"></i>
+                    <span>Kotak Suara & Aspirasi</span>
+                </button>
+                
+                <div class="pt-3 border-t border-navy-800 dark:border-slate-800 space-y-2">
+                    <button onclick="toggleTheme()" class="w-full py-2 px-3 rounded-xl bg-navy-900 dark:bg-slate-900 text-slate-200 text-xs font-bold flex items-center justify-between border border-navy-800 dark:border-slate-800">
+                        <span>Tema Tampilan Website</span>
+                        <span id="themeLabelMobile" class="text-amber-400 dark:text-skycustom-300 flex items-center gap-1"><i class="fa-solid fa-moon"></i> Dark</span>
+                    </button>
+                    <div id="mobileAdminBadge" class="hidden items-center text-xs text-emerald-400">
+                        <i class="fa-solid fa-shield-halved mr-1"></i> Admin Active
+                    </div>
+                    <button id="mobileAuthBtn" onclick="openAuthModal(); toggleMobileMenu()" class="w-full text-center py-2.5 rounded-xl text-xs font-bold bg-skycustom-500 text-white">
+                        Login Admin
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            
+            <!-- Section Beranda -->
+            <section id="section-beranda" class="space-y-10">
+                <div class="relative bg-navy-900 dark:bg-slate-900 rounded-3xl overflow-hidden shadow-2xl text-white border border-navy-800 dark:border-slate-800">
+                    <div class="absolute inset-0">
+                        <img id="homeHeroImg" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1200" alt="Foto Kelas" class="w-full h-full object-cover opacity-25">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950 dark:from-slate-950 via-navy-900/80 dark:via-slate-900/80 to-transparent"></div>
+                    </div>
+                    
+                    <div class="relative z-10 p-6 sm:p-10 md:p-12 max-w-4xl space-y-4">
+                        <span class="inline-block px-3 py-1 bg-skycustom-500/20 text-skycustom-400 border border-skycustom-500/30 rounded-full text-xs font-semibold uppercase tracking-wider">Official Class Portal</span>
+                        <h1 id="homeWelcomeTitle" class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white">
+                            Selamat Datang di Website Kelas VII A
+                        </h1>
+                        <p id="homeWelcomeSub" class="text-lg text-slate-300 font-medium">
+                            SMPN 2 Darangdan - Tahun Ajaran 2026–2027
+                        </p>
+                        <blockquote id="homeSloganText" class="italic text-skycustom-400 border-l-4 border-skycustom-500 pl-4 py-1 text-sm sm:text-base font-medium">
+                            "Satu Kelas, Satu Cerita, Sejuta Kenangan"
+                        </blockquote>
+                        <p id="homeDescText" class="text-slate-300 text-sm sm:text-base leading-relaxed pt-2">
+                            Website ini menjadi wadah kebersamaan, kreativitas, dan album kenangan digital bagi seluruh siswa, guru, dan orang tua murid Kelas VII A SMPN 2 Darangdan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- BIRTHDAY WIDGET SECTION -->
+                <div id="homeBirthdaySection" class="hidden"></div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 flex items-center space-x-4">
+                        <div class="w-14 h-14 rounded-2xl bg-skycustom-100 dark:bg-skycustom-950 text-skycustom-600 dark:text-skycustom-400 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Siswa</span>
+                            <div id="statTotalSiswa" class="text-2xl font-extrabold text-slate-800 dark:text-slate-100">0</div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Siswa Terdaftar</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 flex items-center space-x-4">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Wali Kelas</span>
+                            <div id="statWaliKelas" class="text-base font-extrabold text-slate-800 dark:text-slate-100 truncate max-w-[180px]">Bu Faridah, S.Pd.</div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Guru Pembimbing</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 flex items-center space-x-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Lencana & Apresiasi</span>
+                            <div class="text-xl font-extrabold text-amber-600 dark:text-amber-400">Gamifikasi Aktif</div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Poin Kebaikkan VII A</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="font-bold text-slate-800 dark:text-slate-100 text-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-crown text-amber-500"></i> Pengurus Kelas
+                                </h2>
+                                <button onclick="switchTab('organisasi')" class="text-xs text-skycustom-600 dark:text-skycustom-400 font-semibold hover:underline">Lihat Semua</button>
+                            </div>
+                            <div id="homeOrganisasiPreview" class="space-y-3"></div>
+                        </div>
+                        <button onclick="switchTab('organisasi')" class="mt-6 w-full py-2.5 text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl transition-colors">
+                            Struktur Lengkap Organisasi &rarr;
+                        </button>
+                    </div>
+
+                    <div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="font-bold text-slate-800 dark:text-slate-100 text-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-images text-skycustom-500"></i> Kenangan Terbaru
+                                </h2>
+                                <button onclick="switchTab('album')" class="text-xs text-skycustom-600 dark:text-skycustom-400 font-semibold hover:underline">Lihat Galeri</button>
+                            </div>
+                            <div id="homeAlbumPreview" class="grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
+                        </div>
+                        <button onclick="switchTab('album')" class="mt-6 w-full py-2.5 text-xs font-semibold bg-skycustom-50 dark:bg-skycustom-950/50 text-skycustom-600 dark:text-skycustom-400 hover:bg-skycustom-100 dark:hover:bg-skycustom-900/50 rounded-xl transition-colors">
+                            Buka Album Kenangan Lengkap &rarr;
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-profil" class="hidden space-y-8">
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 dark:border-slate-800">
+                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                        <img id="profilClassPhoto" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800" alt="Foto Kelas VII A" class="w-full md:w-1/2 h-64 sm:h-80 object-cover rounded-2xl shadow-md">
+                        <div class="space-y-4 w-full md:w-1/2">
+                            <span class="px-3 py-1 bg-skycustom-100 dark:bg-skycustom-950 text-skycustom-600 dark:text-skycustom-400 rounded-full text-xs font-bold uppercase tracking-wider">Identitas Kelas</span>
+                            <h2 class="text-3xl font-extrabold text-slate-800 dark:text-slate-100">Kelas VII A SMPN 2 Darangdan</h2>
+                            <p id="profilDescText" class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
+                                Kelas VII A adalah komite belajar yang adaptif, kreatif, dan berorientasi pada persaudaraan yang erat di bawah naungan pembimbing wali kelas.
+                            </p>
+                            <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <span class="text-xs font-bold uppercase text-slate-400 block mb-1">Motto Kelas</span>
+                                <p id="profilMottoText" class="text-slate-800 dark:text-slate-200 font-semibold italic text-sm">
+                                    “Bersama dalam belajar, kompak dalam kebersamaan, berprestasi dengan semangat.”
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+                        <div class="bg-slate-50 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <h3 class="font-bold text-navy-900 dark:text-skycustom-400 text-lg mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye text-skycustom-500"></i> Visi Kelas
+                            </h3>
+                            <p id="profilVisiText" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Menjadi kelas yang unggul dalam akademik, santun dalam perilaku, dan kompak dalam persaudaraan berdasarkan ketakwaan.
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <h3 class="font-bold text-navy-900 dark:text-skycustom-400 text-lg mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-indigo-500"></i> Misi Kelas
+                            </h3>
+                            <ul id="profilMisiList" class="space-y-2 text-slate-600 dark:text-slate-300 text-sm list-disc list-inside"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-jadwal" class="hidden space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="px-3 py-1 bg-skycustom-100 dark:bg-skycustom-950 text-skycustom-600 dark:text-skycustom-400 rounded-full text-xs font-bold uppercase tracking-wider">Kurikulum & Pembelajaran</span>
+                    <h2 class="text-3xl font-extrabold text-slate-800 dark:text-slate-100">Jadwal Pelajaran Kelas VII A</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Jadwal kegiatan belajar mengajar harian dari Senin sampai Jum'at.</p>
+                </div>
+
+                <div id="jadwalContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </section>
+
+            <section id="section-organisasi" class="hidden space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="px-3 py-1 bg-skycustom-100 dark:bg-skycustom-950 text-skycustom-600 dark:text-skycustom-400 rounded-full text-xs font-bold uppercase tracking-wider">Kepengurusan Kelas</span>
+                    <h2 class="text-3xl font-extrabold text-slate-800 dark:text-slate-100">Struktur Organisasi Kelas VII A</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Bagan hierarki bertingkat pengurus kelas dan wali kelas yang bertugas menjaga keharmonisan, kebersihan, serta ketertiban kelas.</p>
+                </div>
+
+                <div id="organisasiTreeContainer"></div>
+            </section>
+
+            <section id="section-siswa" class="hidden space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h2 class="text-2xl font-extrabold text-slate-800 dark:text-slate-100">Daftar Siswa & Lencana Digital</h2>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-700 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                                ⭐ Gamifikasi Aktif
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Seluruh anggota resmi siswa Kelas VII A T.A 2026–2027 beserta pencapaian lencana kebaikannya.</p>
+                    </div>
+                    
+                    <div class="w-full md:w-auto flex items-center gap-3">
+                        <div class="relative w-full md:w-64">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input type="text" id="siswaSearchInput" oninput="renderSiswa()" placeholder="Cari nama atau lencana..." class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-skycustom-500">
+                        </div>
+                        <span id="siswaBadgeCount" class="bg-skycustom-100 dark:bg-skycustom-950 text-skycustom-700 dark:text-skycustom-300 px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap">
+                            0 Siswa
+                        </span>
+                    </div>
+                </div>
+
+                <div id="siswaGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+            </section>
+
+            <section id="section-quiz" class="hidden space-y-8">
+                <div id="quizContainer"></div>
+            </section>
+
+            <section id="section-album" class="hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-slate-800 dark:text-slate-100">Album Kenangan & Video</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Kumpulan momen berharga, foto, dan video kegiatan kebersamaan Kelas VII A.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2" id="albumCategoryFilters">
+                        <button onclick="filterAlbum('Semua')" class="album-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-skycustom-500 text-white">Semua</button>
+                        <button onclick="filterAlbum('Kegiatan')" class="album-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">Kegiatan</button>
+                        <button onclick="filterAlbum('Acara')" class="album-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">Acara</button>
+                        <button onclick="filterAlbum('Foto Bersama')" class="album-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">Foto Bersama</button>
+                        <button onclick="filterAlbum('Video')" class="album-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"><i class="fa-solid fa-video mr-1"></i> Video</button>
+                    </div>
+                </div>
+
+                <div id="albumGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </section>
+
+            <!-- Section Kotak Suara & Aspirasi Digital -->
+            <section id="section-aspirasi" class="hidden space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="px-3 py-1 bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 rounded-full text-xs font-bold uppercase tracking-wider">Komunikasi & Keakraban</span>
+                    <h2 class="text-3xl font-extrabold text-slate-800 dark:text-slate-100">Kotak Suara & Aspirasi Digital</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Wadah terbuka bagi seluruh siswa VII A untuk menyampaikan saran, ide kegiatan, atau pesan apresiasi kebersamaan.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Form Kirim Aspirasi -->
+                    <div class="lg:col-span-1 bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 space-y-4">
+                        <div class="flex items-center space-x-3 border-b border-slate-100 dark:border-slate-800 pb-3">
+                            <div class="w-10 h-10 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-lg shadow-md shadow-amber-500/20">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-slate-800 dark:text-slate-100 text-base">Kirim Pesan / Ide</h3>
+                                <p class="text-xs text-slate-400">Saran, ide acara, atau ucapan</p>
+                            </div>
+                        </div>
+
+                        <form onsubmit="handleAspirasiSubmit(event)" class="space-y-4 text-xs">
+                            <div>
+                                <label class="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Kategori Masukan</label>
+                                <select id="aspKategori" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white font-semibold focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                    <option value="Saran Kelas">Saran untuk Kelas</option>
+                                    <option value="Ide Acara">Ide Acara / Kegiatan</option>
+                                    <option value="Pesan Apresiasi">Pesan Apresiasi / Terima Kasih</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-2xl border border-amber-200/60 dark:border-amber-900/40 space-y-2">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" id="aspIsAnonim" onchange="toggleAnonimInput()" class="w-4 h-4 text-amber-500 rounded focus:ring-amber-400">
+                                    <span class="font-bold text-amber-800 dark:text-amber-300">Kirim Secara Anonim</span>
+                                </label>
+                                <p class="text-[10px] text-amber-700 dark:text-amber-400 leading-tight">Nama Anda tidak akan ditampilkan jika opsi ini dicentang.</p>
+                            </div>
+
+                            <div id="aspNamaContainer">
+                                <label class="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Nama Lengkap Siswa</label>
+                                <input type="text" id="aspNamaInput" placeholder="Masukan nama Anda..." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                            </div>
+
+                            <div>
+                                <label class="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Isi Pesan / Aspirasi</label>
+                                <textarea id="aspPesanInput" rows="4" required placeholder="Tuliskan saran, ide, atau ucapan apresiasi Anda di sini..." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow-md shadow-amber-500/20 transition-all flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Kirim Aspirasi Kelas</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Papan Aspirasi Terkirim -->
+                    <div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
+                            <h3 class="font-extrabold text-slate-800 dark:text-slate-100 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-comments text-amber-500"></i> Papan Aspirasi & Apresiasi
+                            </h3>
+                            <span id="aspirasiBadgeCount" class="text-xs font-bold bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 px-3 py-1 rounded-full">
+                                0 Masukan
+                            </span>
+                        </div>
+
+                        <div id="aspirasiListContainer" class="space-y-4"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Main App Footer -->
+        <footer class="bg-navy-950 dark:bg-slate-950 text-slate-400 border-t border-navy-800 dark:border-slate-800 py-8 mt-12 text-center text-xs">
+            <div class="max-w-7xl mx-auto px-4 space-y-4">
+                <p class="text-slate-200 font-medium">"Satu Kelas, Satu Cerita, Sejuta Kenangan"</p>
+                <div class="flex justify-center items-center space-x-4">
+                    <a href="https://www.tiktok.com/@class_vii.a_67?_r=1&_t=ZS-9APbZtfZbuB" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-navy-900 dark:bg-slate-900 hover:bg-navy-800 dark:hover:bg-slate-800 text-slate-200 border border-navy-800 dark:border-slate-800 transition-all">
+                        <i class="fa-brands fa-tiktok text-sm"></i>
+                        <span>TikTok Resmi Kelas</span>
+                    </a>
+                    <a href="https://www.instagram.com/official_class_7a_?cplk=MWZicGlkOGNtcGhidw==&utm_source=ig_contact_invite" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-navy-900 dark:bg-slate-900 hover:bg-navy-800 dark:hover:bg-slate-800 text-slate-200 border border-navy-800 dark:border-slate-800 transition-all">
+                        <i class="fa-brands fa-instagram text-sm text-pink-400"></i>
+                        <span>Instagram Resmi Kelas</span>
+                    </a>
+                </div>
+                <p>&copy; 2026 SMPN 2 Darangdan - Kelas VII A. Dikelola bersama dengan penuh kebanggaan.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative border border-slate-100 dark:border-slate-800 animate-float">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div class="text-center space-y-2 mb-6">
+                <div class="w-12 h-12 bg-skycustom-100 dark:bg-skycustom-950 text-skycustom-600 dark:text-skycustom-400 rounded-2xl mx-auto flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 id="authModalTitle" class="text-xl font-bold">Login Portal Admin</h3>
+                <p id="authModalDesc" class="text-xs text-slate-500 dark:text-slate-400">Masukan kredensial admin untuk mengelola website kelas.</p>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Username Admin</label>
+                    <input type="text" id="loginUsername" required placeholder="Masukan username" class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-skycustom-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Password</label>
+                    <div class="relative">
+                        <input type="password" id="loginPassword" required placeholder="Masukan password" class="w-full pl-4 pr-10 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-skycustom-500 focus:outline-none">
+                        <button type="button" onclick="togglePasswordVisibility('loginPassword')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-3 bg-skycustom-500 hover:bg-skycustom-600 text-white rounded-xl text-xs font-bold shadow-md shadow-skycustom-500/20 transition-all">
+                    Masuk Portal Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="adminDashboardModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-slate-50 dark:bg-slate-900 rounded-3xl w-full max-w-5xl h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100">
+            <!-- Admin Topbar -->
+            <div class="bg-navy-900 dark:bg-slate-950 text-white p-4 sm:p-6 flex justify-between items-center border-b border-navy-800 dark:border-slate-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-xl bg-skycustom-500 flex items-center justify-center font-bold text-sm">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base">Panel Pengelola Website</h3>
+                        <p class="text-xs text-slate-300">Kelas VII A SMPN 2 Darangdan</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="logoutAdmin()" class="px-3 py-1.5 text-xs font-semibold bg-red-500/20 text-red-300 hover:bg-red-500/30 rounded-xl transition-colors">
+                        Logout
+                    </button>
+                    <button onclick="closeAdminDashboard()" class="text-slate-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Nav Tabs -->
+            <div class="bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 px-4 flex space-x-2 overflow-x-auto text-xs font-semibold">
+                <button onclick="switchAdminTab('homeprofil')" id="admTab-homeprofil" class="adm-tab-btn px-4 py-3 border-b-2 border-skycustom-500 text-skycustom-600 dark:text-skycustom-400 whitespace-nowrap">Beranda & Profil</button>
+                <button onclick="switchAdminTab('organisasi')" id="admTab-organisasi" class="adm-tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap">Kelola Organisasi & Foto</button>
+                <button onclick="switchAdminTab('siswa')" id="admTab-siswa" class="adm-tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap"><i class="fa-solid fa-medal text-amber-500 mr-1"></i> Kelola Siswa & Lencana</button>
+                <button onclick="switchAdminTab('quiz')" id="admTab-quiz" class="adm-tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap"><i class="fa-solid fa-gamepad mr-1"></i> Kelola Fun Quiz</button>
+                <button onclick="switchAdminTab('album')" id="admTab-album" class="adm-tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap">Kelola Album & Video</button>
+                <button onclick="switchAdminTab('aspirasi')" id="admTab-aspirasi" class="adm-tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap"><i class="fa-solid fa-box-archive mr-1"></i> Kelola Kotak Aspirasi</button>
+                <button onclick="switchAdminTab('akun')" id="admTab-akun" class="adm-tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap">Pengaturan Akun</button>
+            </div>
+
+            <!-- Admin Body Scrollable -->
+            <div class="flex-grow p-6 overflow-y-auto space-y-6">
+                <!-- Tab Admin: Beranda & Profil -->
+                <div id="admSec-homeprofil" class="adm-sec-view space-y-6">
+                    <!-- Birthday Feature Toggle Setting -->
+                    <form onsubmit="saveBirthdayConfig(event)" class="space-y-4 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-sm text-pink-600 dark:text-pink-400 flex items-center gap-2">
+                                    <i class="fa-solid fa-cake-candles"></i> Fitur Kalender Ulang Tahun Siswa
+                                </h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Aktifkan atau nonaktifkan tampilan pengingat ulang tahun siswa di beranda.</p>
+                            </div>
+                            <select id="admBirthdayEnabled" class="px-3 py-1.5 text-xs rounded-xl border font-bold border-slate-200 dark:border-slate-700 dark:bg-slate-900 focus:outline-none">
+                                <option value="true">ON (Aktif)</option>
+                                <option value="false">OFF (Nonaktif)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs rounded-xl shadow-sm">
+                            Simpan Pengaturan Ulang Tahun
+                        </button>
+                    </form>
+
+                    <form onsubmit="saveHomeProfilAdmin(event)" class="space-y-4 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <h4 class="font-bold text-sm border-b dark:border-slate-700 pb-2">Edit Teks Beranda & Foto Utama (Banner)</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs font-semibold block mb-1">Judul Sambutan</label>
+                                <input type="text" id="admHomeTitle" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold block mb-1">Slogan Kelas</label>
+                                <input type="text" id="admHomeSlogan" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">Deskripsi Singkat Beranda</label>
+                            <textarea id="admHomeDesc" rows="3" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900"></textarea>
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">Motto Kelas (Profil Page)</label>
+                            <input type="text" id="admProfilMotto" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">Foto Utama Kelas (URL atau Upload File)</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="admHomeFoto" placeholder="https://..." class="flex-grow px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                                <label class="cursor-pointer bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shrink-0">
+                                    <i class="fa-solid fa-upload"></i> Upload
+                                    <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'admHomeFoto')">
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="px-5 py-2.5 bg-skycustom-500 text-white font-bold text-xs rounded-xl shadow-sm">Simpan Perubahan Teks & Foto Utama</button>
+                    </form>
+                </div>
+
+                <!-- Tab Admin: Organisasi CRUD -->
+                <div id="admSec-organisasi" class="adm-sec-view hidden space-y-4">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-sm">Daftar Pengurus Kelas</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Kelola dan ubah foto pengurus kelas dan wali kelas.</p>
+                        </div>
+                        <button onclick="openFormModal('organisasi')" class="px-3 py-2 bg-skycustom-500 text-white rounded-xl text-xs font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-plus"></i> Tambah Pengurus
+                        </button>
+                    </div>
+                    <div id="admOrganisasiList" class="space-y-2"></div>
+                </div>
+
+                <!-- Tab Admin: Siswa CRUD & Badges -->
+                <div id="admSec-siswa" class="adm-sec-view hidden space-y-4">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-medal text-amber-500"></i> Kelola Siswa, Poin & Lencana Digital
+                            </h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Tambah siswa baru, ubah poin apresiasi, dan berikan lencana kebaikan digital.</p>
+                        </div>
+                        <button onclick="openFormModal('siswa')" class="px-3 py-2 bg-skycustom-500 text-white rounded-xl text-xs font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-user-plus"></i> Tambah Siswa Baru
+                        </button>
+                    </div>
+                    <div id="admSiswaList" class="space-y-2"></div>
+                </div>
+
+                <div id="admSec-quiz" class="adm-sec-view hidden space-y-6">
+                    <form onsubmit="saveQuizConfig(event)" class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+                        <div class="flex justify-between items-center border-b dark:border-slate-700 pb-3">
+                            <h4 class="font-bold text-sm">Pengaturan Modul Fun Quiz</h4>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs font-bold">Status Quiz:</span>
+                                <select id="admQuizEnabled" class="px-3 py-1.5 text-xs rounded-xl border font-bold border-slate-200 dark:border-slate-700 dark:bg-slate-900 focus:outline-none">
+                                    <option value="true">ON (Aktif)</option>
+                                    <option value="false">OFF (Nonaktif)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs font-semibold block mb-1">Judul Kuis</label>
+                                <input type="text" id="admQuizTitle" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold block mb-1">Deskripsi Kuis</label>
+                                <input type="text" id="admQuizDesc" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-xl shadow-sm">
+                            Simpan Pengaturan Kuis
+                        </button>
+                    </form>
+
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-sm">Daftar Pertanyaan Kuis</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Kelola soal, pilihan jawaban, dan kunci jawaban kuis.</p>
+                            </div>
+                            <button onclick="openQuizQuestionModal()" class="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-plus"></i> Tambah Pertanyaan Kuis
+                            </button>
+                        </div>
+
+                        <div id="admQuizQuestionsList" class="space-y-3"></div>
+                    </div>
+                </div>
+
+                <!-- Tab Admin: Album CRUD -->
+                <div id="admSec-album" class="adm-sec-view hidden space-y-4">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-sm">Galeri Foto & Video Kenangan</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Tambah foto atau video kegiatan kelas baru.</p>
+                        </div>
+                        <button onclick="openFormModal('album')" class="px-3 py-2 bg-skycustom-500 text-white rounded-xl text-xs font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-plus"></i> Tambah Kenangan (Foto/Video)
+                        </button>
+                    </div>
+                    <div id="admAlbumList" class="space-y-2"></div>
+                </div>
+
+                <!-- Tab Admin: Aspirasi CRUD & Reply -->
+                <div id="admSec-aspirasi" class="adm-sec-view hidden space-y-4">
+                    <div class="flex justify-between items-center border-b dark:border-slate-700 pb-3">
+                        <div>
+                            <h4 class="font-bold text-sm">Kelola Kotak Aspirasi & Pesan Siswa</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Tindak lanjuti, beri balasan, atau hapus masukan dan saran dari siswa.</p>
+                        </div>
+                    </div>
+                    <div id="admAspirasiList" class="space-y-3"></div>
+                </div>
+
+                <!-- Tab Admin: Akun Settings -->
+                <div id="admSec-akun" class="adm-sec-view hidden space-y-6">
+                    <form onsubmit="handleAccountChange(event)" class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 max-w-md space-y-4">
+                        <h4 class="font-bold text-sm border-b dark:border-slate-700 pb-2">Ubah Username & Password Admin</h4>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">Username Baru</label>
+                            <input type="text" id="admChangeUsername" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">Password Baru</label>
+                            <input type="password" id="admChangePassword" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                        </div>
+                        <button type="submit" class="w-full py-2.5 bg-skycustom-500 text-white font-bold text-xs rounded-xl">Update Akun Admin</button>
+                    </form>
+
+                    <div class="p-6 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 rounded-2xl max-w-md space-y-2">
+                        <h4 class="font-bold text-red-800 dark:text-red-300 text-sm">Reset Data Website</h4>
+                        <p class="text-xs text-red-600 dark:text-red-400">Kembalikan seluruh data profil, pengurus, siswa, dan album ke data awal bawaan.</p>
+                        <button onclick="resetToDefaultData()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold">
+                            Reset ke Data Awal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Question Modal -->
+    <div id="quizQuestionModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-3xl p-6 max-w-lg w-full shadow-2xl relative max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+            <button onclick="closeQuizQuestionModal()" class="absolute top-4 right-4 text-slate-400 p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 id="quizQuestionModalTitle" class="text-lg font-bold mb-4">Tambah Soal Kuis</h3>
+            <form onsubmit="handleQuizQuestionSubmit(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="font-semibold block mb-1">Pertanyaan / Soal</label>
+                    <textarea id="qqText" required placeholder="Tuliskan pertanyaan kuis di sini..." class="w-full p-2.5 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-purple-500 focus:outline-none"></textarea>
+                </div>
+                <div class="space-y-2">
+                    <label class="font-semibold block">Pilihan Jawaban (A, B, C, D)</label>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-purple-600">A</span>
+                        <input type="text" id="qqOpt0" required placeholder="Pilihan A" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-purple-600">B</span>
+                        <input type="text" id="qqOpt1" required placeholder="Pilihan B" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-purple-600">C</span>
+                        <input type="text" id="qqOpt2" required placeholder="Pilihan C" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-purple-600">D</span>
+                        <input type="text" id="qqOpt3" required placeholder="Pilihan D" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl">
+                    </div>
+                </div>
+                <div>
+                    <label class="font-semibold block mb-1">Jawaban Yang Benar</label>
+                    <select id="qqCorrect" class="w-full p-2.5 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl font-bold text-emerald-600 dark:text-emerald-400">
+                        <option value="0">Pilihan A</option>
+                        <option value="1">Pilihan B</option>
+                        <option value="2">Pilihan C</option>
+                        <option value="3">Pilihan D</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold shadow-md">
+                    Simpan Soal Kuis
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Detail Modal -->
+    <div id="studentDetailModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-3xl max-w-md w-full overflow-hidden shadow-2xl relative border border-slate-100 dark:border-slate-800">
+            <button onclick="closeStudentModal()" class="absolute top-3 right-3 text-white bg-black/40 hover:bg-black/60 p-2 rounded-full z-10">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+            <div id="studentModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex flex-col items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-2xl p-2 hover:opacity-75 z-20">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="lightboxContentContainer" class="max-w-4xl w-full flex flex-col items-center justify-center"></div>
+    </div>
+
+    <!-- Generic Form Modal -->
+    <div id="genericFormModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-3xl p-6 max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+            <button onclick="closeGenericFormModal()" class="absolute top-4 right-4 text-slate-400 p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 id="genericFormTitle" class="text-lg font-bold mb-4">Tambah Data</h3>
+            <form id="genericForm" onsubmit="handleGenericFormSubmit(event)" class="space-y-3">
+                <div id="genericFormFields" class="space-y-3"></div>
+                <button type="submit" class="w-full py-2.5 bg-skycustom-500 text-white rounded-xl text-xs font-bold shadow-md">Simpan Data</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+    <script>
+        // Available standard badges definition
+        const BADGE_PRESETS = [
+            { id: 'ketua', title: 'Ketua Teladan', icon: 'fa-crown', color: 'bg-amber-100 text-amber-700 dark:bg-amber-950/80 dark:text-amber-300 border-amber-300' },
+            { id: 'master_quiz', title: 'Master Quiz', icon: 'fa-trophy', color: 'bg-purple-100 text-purple-700 dark:bg-purple-950/80 dark:text-purple-300 border-purple-300' },
+            { id: 'piket', title: 'Piket Ter-Disiplin', icon: 'fa-broom', color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 border-emerald-300' },
+            { id: 'ramah', title: 'Sahabat Ter-Ramah', icon: 'fa-heart', color: 'bg-pink-100 text-pink-700 dark:bg-pink-950/80 dark:text-pink-300 border-pink-300' },
+            { id: 'olahraga', title: 'Bintang Lapangan', icon: 'fa-futbol', color: 'bg-blue-100 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 border-blue-300' },
+            { id: 'kreator', title: 'Kreator Mading', icon: 'fa-paint-brush', color: 'bg-orange-100 text-orange-700 dark:bg-orange-950/80 dark:text-orange-300 border-orange-300' },
+            { id: 'rajin', title: 'Siswa Disiplin', icon: 'fa-user-check', color: 'bg-sky-100 text-sky-700 dark:bg-sky-950/80 dark:text-sky-300 border-sky-300' }
+        ];
+
+        // Default Application State
+        const defaultData = {
+            admin: {
+                username: "AdminViiA",
+                password: "12345678",
+                isLoggedIn: false
+            },
+            home: {
+                title: "Selamat Datang di Website Kelas VII A",
+                slogan: "Satu Kelas, Satu Cerita, Sejuta Kenangan",
+                desc: "Website ini menjadi wadah kebersamaan, kreativitas, dan album kenangan digital bagi seluruh siswa, guru, dan orang tua murid Kelas VII A SMPN 2 Darangdan.",
+                foto: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1200"
+            },
+            birthday: {
+                enabled: true
+            },
+            profil: {
+                motto: "Bersama dalam belajar, kompak dalam kebersamaan, berprestasi dengan semangat.",
+                visi: "Menjadi kelas yang unggul dalam akademik, santun dalam perilaku, dan kompak dalam persaudaraan berdasarkan ketakwaan.",
+                misi: [
+                    "Saling mendukung dalam proses kegiatan belajar mengajar harian.",
+                    "Menjaga kebersihan, kerapihan, dan suasana kelas yang nyaman.",
+                    "Aktif berpartisipasi dalam setiap kegiatan sekolah dan ekstra kurikuler.",
+                    "Menjalin rasa kekeluargaan dan solidaritas antar sesama anggota kelas."
+                ],
+                desc: "Kelas VII A adalah komite belajar yang adaptif, kreatif, dan berorientasi pada persaudaraan yang erat di bawah naungan pembimbing wali kelas.",
+                foto: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800"
+            },
+            organisasi: [
+                { id: "org_1", nama: "Bu Faridah, S.Pd.", jabatan: "Wali Kelas", foto: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" },
+                { id: "org_2", nama: "Dinar Nurbagja", jabatan: "Ketua Kelas", foto: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400" },
+                { id: "org_3", nama: "Rendi Fadilah", jabatan: "Wakil Ketua Kelas", foto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" },
+                { id: "org_4", nama: "Risma", jabatan: "Sekretaris 1", foto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" },
+                { id: "org_5", nama: "Khaila", jabatan: "Sekretaris 2", foto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400" },
+                { id: "org_6", nama: "Zahra", jabatan: "Bendahara 1", foto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" },
+                { id: "org_7", nama: "Almira", jabatan: "Bendahara 2", foto: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=400" }
+            ],
+            siswa: [
+                { id: "s_1", nama: "Dinar Nurbagja", gender: "Laki-laki", tanggalLahir: "2013-10-09", hobi: "Membaca & Berorganisasi", citaCita: "Pemimpin / Pengusaha", poin: 150, lencana: ["Ketua Teladan", "Master Quiz", "Piket Ter-Disiplin"], bio: "Dinar Nurbagja adalah siswa Kelas VII A yang senang belajar, bekerja sama, dan berusaha menjadi ketua kelas yang bertanggung jawab.", foto: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400" },
+                { id: "s_2", nama: "Rendi Fadilah", gender: "Laki-laki", tanggalLahir: "2013-10-24", hobi: "Sepak Bola", citaCita: "Atlet Profesional", poin: 125, lencana: ["Bintang Lapangan", "Piket Ter-Disiplin"], bio: "Wakil ketua kelas yang sigap, ramah, dan aktif dalam kegiatan olahraga kelas.", foto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" },
+                { id: "s_3", nama: "Risma", gender: "Perempuan", tanggalLahir: "2013-11-15", hobi: "Menulis & Membaca", citaCita: "Penulis / Guru", poin: 140, lencana: ["Sahabat Ter-Ramah", "Siswa Disiplin"], bio: "Sekretaris 1 yang teliti dalam mengelola catatan absensi dan dokumen kebersihan kelas.", foto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" },
+                { id: "s_4", nama: "Khaila", gender: "Perempuan", tanggalLahir: "2013-05-18", hobi: "Menggambar & Melukis", citaCita: "Desainer Grafis", poin: 115, lencana: ["Kreator Mading", "Sahabat Ter-Ramah"], bio: "Siswa kreatif yang membantu dalam dekorasi mading kelas dan agenda harian.", foto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400" },
+                { id: "s_5", nama: "Zahra", gender: "Perempuan", tanggalLahir: "2013-10-12", hobi: "Menyanyi", citaCita: "Dokter", poin: 130, lencana: ["Master Quiz", "Siswa Disiplin"], bio: "Bendahara 1 yang jujur, disiplin, serta selalu menjaga kerapian keuangan kas.", foto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" },
+                { id: "s_6", nama: "Almira", gender: "Perempuan", tanggalLahir: "2013-08-04", hobi: "Mendengarkan Musik", citaCita: "Psikolog", poin: 105, lencana: ["Sahabat Ter-Ramah"], bio: "Siswa yang ramah, hangat, dan siap merangkul teman-teman di kelas.", foto: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=400" }
+            ],
+            jadwal: [
+                { hari: "Senin", pel: ["IPS", "Bahasa Inggris", "IPA"] },
+                { hari: "Selasa", pel: ["Bahasa Indonesia", "Matematika", "Bahasa Sunda", "PAI"] },
+                { hari: "Rabu", pel: ["PJOK", "IPA", "AKPK", "Bahasa Indonesia"] },
+                { hari: "Kamis", pel: ["SBK", "Matematika", "Informatika", "Pendidikan Pancasila"] },
+                { hari: "Jum'at", pel: ["KO KULIKULER"] }
+            ],
+            quiz: {
+                enabled: true,
+                title: "Fun Quiz Kebersamaan VII A",
+                desc: "Uji seberapa kompak dan kenal kamu dengan fakta-fakta seru di Kelas VII A!",
+                questions: [
+                    { id: "q_1", question: "Siapakah nama Wali Kelas VII A SMPN 2 Darangdan?", options: ["Bu Faridah, S.Pd.", "Bu Ani", "Pak Budi", "Bu Siti"], correctAnswer: 0 },
+                    { id: "q_2", question: "Siapa Ketua Kelas VII A T.A 2026–2027?", options: ["Rendi Fadilah", "Dinar Nurbagja", "Risma", "Ahmad"], correctAnswer: 1 },
+                    { id: "q_3", question: "Apa slogan resmi dari Kelas VII A?", options: ["Satu Kelas Sejuta Teman", "Satu Kelas, Satu Cerita, Sejuta Kenangan", "Belajar Tanpa Henti", "Kompak Selalu"], correctAnswer: 1 },
+                    { id: "q_4", question: "Pelajaran apa yang dijadwalkan khusus pada hari Jum'at?", options: ["PJOK", "Matematika", "KO KULIKULER", "Informatika"], correctAnswer: 2 }
+                ]
+            },
+            aspirasi: [
+                { id: "asp_1", nama: "Siswa VII A", anonim: true, kategori: "Ide Acara", pesan: "Bagaimana kalau setelah ujian semester nanti kita mengadakan syukuran kecil dan tukar kado di kelas?", tanggal: "2026-10-01", status: "Ditindaklanjuti", balasanAdmin: "Ide sangat menarik! Pengurus kelas akan mendiskusikan teknisnya bersama Wali Kelas." },
+                { id: "asp_2", nama: "Siswa VII A", anonim: false, kategori: "Pesan Apresiasi", pesan: "Terima kasih untuk petugas piket dan pengurus kelas yang selalu menjaga kebersihan dan kerapihan ruang VII A!", tanggal: "2026-10-05", status: "Selesai", balasanAdmin: "Terima kasih kembali! Mari kita jaga kebersamaan dan kerapihan kelas ini terus." }
+            ],
+            album: [
+                { id: "alb_1", judul: "Foto Bersama Awal Semester", tipeMedia: "Foto", kategori: "Foto Bersama", tanggal: "2026-07-15", deskripsi: "Momen kebersamaan pertama kali seluruh siswa VII A bersama wali kelas.", url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800" },
+                { id: "alb_2", judul: "Kegiatan Kerja Kelompok IPA", tipeMedia: "Foto", kategori: "Kegiatan", tanggal: "2026-08-10", deskripsi: "Praktikum dan kerja kelompok siswa di laboratorium IPA sekolah.", url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800" },
+                { id: "alb_3", judul: "Highlight Kegiatan Pentas Seni Kelas", tipeMedia: "Video", kategori: "Video", tanggal: "2026-09-01", deskripsi: "Tampilan kreasi seni siswa VII A pada acara pekan seni SMPN 2 Darangdan.", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+            ]
+        };
+
+        let appData = {};
+        let activeTab = 'beranda';
+        let activeAdminTab = 'homeprofil';
+        let activeGenericType = null;
+        let activeEditId = null;
+        let activeEditQuizQId = null;
+        let currentQuizIndex = 0;
+        let userQuizAnswers = [];
+        let isQuizSubmitted = false;
+        let isDarkMode = false;
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            applyTheme();
+            localStorage.setItem('class_viia_theme', isDarkMode ? 'dark' : 'light');
+            showToast(isDarkMode ? "Mode Gelap diaktifkan" : "Mode Terang diaktifkan", "info");
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('class_viia_theme');
+            if (savedTheme) {
+                isDarkMode = savedTheme === 'dark';
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                isDarkMode = true;
+            }
+            applyTheme();
+        }
+
+        function applyTheme() {
+            const root = document.documentElement;
+            const iconLanding = document.getElementById('themeIconLanding');
+            const iconNav = document.getElementById('themeIconNav');
+            const labelNav = document.getElementById('themeLabelNav');
+            const iconMobile = document.getElementById('themeIconMobileHeader');
+            const labelMobile = document.getElementById('themeLabelMobile');
+
+            if (isDarkMode) {
+                root.classList.add('dark');
+                if (iconLanding) iconLanding.className = "fa-solid fa-sun text-yellow-300";
+                if (iconNav) iconNav.className = "fa-solid fa-sun text-yellow-300";
+                if (labelNav) labelNav.innerText = "Light Mode";
+                if (iconMobile) iconMobile.className = "fa-solid fa-sun text-yellow-300";
+                if (labelMobile) labelMobile.innerHTML = '<i class="fa-solid fa-sun text-yellow-300"></i> Light';
+            } else {
+                root.classList.remove('dark');
+                if (iconLanding) iconLanding.className = "fa-solid fa-moon text-yellow-300";
+                if (iconNav) iconNav.className = "fa-solid fa-moon text-amber-400";
+                if (labelNav) labelNav.innerText = "Dark Mode";
+                if (iconMobile) iconMobile.className = "fa-solid fa-moon text-amber-400";
+                if (labelMobile) labelMobile.innerHTML = '<i class="fa-solid fa-moon text-amber-400"></i> Dark';
+            }
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('class_viia_data_2026');
+            if (saved) {
+                try {
+                    appData = JSON.parse(saved);
+                } catch(e) {
+                    appData = JSON.parse(JSON.stringify(defaultData));
+                }
+            } else {
+                appData = JSON.parse(JSON.stringify(defaultData));
+                saveData();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('class_viia_data_2026', JSON.stringify(appData));
+            renderAll();
+        }
+
+        function resetToDefaultData() {
+            if (confirm("Apakah Anda yakin ingin mengembalikan seluruh data ke pengaturan awal?")) {
+                appData = JSON.parse(JSON.stringify(defaultData));
+                saveData();
+                showToast("Data berhasil di-reset ke bawaan awal", "info");
+            }
+        }
+
+        function navigateToMainApp(tab = 'beranda') {
+            const landing = document.getElementById('landingView');
+            const mainApp = document.getElementById('mainAppView');
+            landing.classList.add('opacity-0');
+            setTimeout(() => {
+                landing.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+                setTimeout(() => {
+                    mainApp.classList.remove('opacity-0');
+                    switchTab(tab);
+                }, 50);
+            }, 300);
+        }
+
+        function showLandingPage() {
+            const landing = document.getElementById('landingView');
+            const mainApp = document.getElementById('mainAppView');
+            mainApp.classList.add('opacity-0');
+            setTimeout(() => {
+                mainApp.classList.add('hidden');
+                landing.classList.remove('hidden');
+                setTimeout(() => {
+                    landing.classList.remove('opacity-0');
+                }, 50);
+            }, 300);
+        }
+
+        function switchTab(tabId) {
+            activeTab = tabId;
+            const sections = ['beranda', 'profil', 'jadwal', 'organisasi', 'siswa', 'quiz', 'album', 'aspirasi'];
+            sections.forEach(s => {
+                const sec = document.getElementById(`section-${s}`);
+                const navBtn = document.getElementById(`nav-${s}`);
+                if (sec) {
+                    if (s === tabId) {
+                        sec.classList.remove('hidden');
+                    } else {
+                        sec.classList.add('hidden');
+                    }
+                }
+                if (navBtn) {
+                    if (s === tabId) {
+                        navBtn.className = "nav-btn px-3 py-2 rounded-lg text-xs font-bold text-skycustom-400 bg-navy-800 dark:bg-slate-800 transition-all";
+                    } else {
+                        navBtn.className = "nav-btn px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-navy-800 dark:hover:bg-slate-800 transition-all";
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function renderAll() {
+            // Home View
+            document.getElementById('homeWelcomeTitle').innerText = appData.home.title || defaultData.home.title;
+            document.getElementById('homeSloganText').innerText = `"${appData.home.slogan || defaultData.home.slogan}"`;
+            document.getElementById('homeDescText').innerText = appData.home.desc || defaultData.home.desc;
+            document.getElementById('homeHeroImg').src = appData.home.foto || defaultData.home.foto;
+            document.getElementById('statTotalSiswa').innerText = appData.siswa.length;
+            
+            const wali = appData.organisasi.find(o => o.jabatan.toLowerCase().includes('wali'));
+            document.getElementById('statWaliKelas').innerText = wali ? wali.nama : "Bu Faridah, S.Pd.";
+
+            renderBirthdayWidget();
+
+            // Home Organisasi Preview
+            const orgPreview = document.getElementById('homeOrganisasiPreview');
+            orgPreview.innerHTML = appData.organisasi.slice(0, 4).map(o => `
+                <div class="flex items-center space-x-3 p-2 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <img src="${o.foto}" class="w-10 h-10 rounded-xl object-cover">
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-800 dark:text-slate-100">${o.nama}</h3>
+                        <p class="text-[10px] text-skycustom-600 dark:text-skycustom-400 font-semibold">${o.jabatan}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Home Album Preview
+            const albumPreview = document.getElementById('homeAlbumPreview');
+            albumPreview.innerHTML = appData.album.slice(0, 3).map(a => `
+                <div onclick="openLightbox('${a.id}')" class="group relative rounded-xl overflow-hidden h-28 cursor-pointer shadow-sm">
+                    <img src="${a.url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <span class="absolute bottom-2 left-2 right-2 text-white text-[10px] font-bold truncate">${a.judul}</span>
+                </div>
+            `).join('');
+
+            // Profil View
+            document.getElementById('profilMottoText').innerText = `“${appData.profil.motto || defaultData.profil.motto}”`;
+            document.getElementById('profilDescText').innerText = appData.profil.desc || defaultData.profil.desc;
+            document.getElementById('profilVisiText').innerText = appData.profil.visi || defaultData.profil.visi;
+            document.getElementById('profilClassPhoto').src = appData.profil.foto || appData.home.foto;
+            
+            const misiList = document.getElementById('profilMisiList');
+            const misis = appData.profil.misi || defaultData.profil.misi;
+            misiList.innerHTML = misis.map(m => `<li>${m}</li>`).join('');
+
+            renderJadwal();
+            renderOrganisasi();
+            renderSiswa();
+            renderQuiz();
+            renderAspirasi();
+            filterAlbum('Semua');
+        }
+
+        function renderBirthdayWidget() {
+            const birthdaySec = document.getElementById('homeBirthdaySection');
+            if (!appData.birthday || !appData.birthday.enabled) {
+                birthdaySec.classList.add('hidden');
+                birthdaySec.innerHTML = '';
+                return;
+            }
+
+            birthdaySec.classList.remove('hidden');
+            const today = new Date();
+            const curMonth = today.getMonth() + 1;
+            const curDate = today.getDate();
+
+            const birthdayToday = appData.siswa.filter(s => {
+                if (!s.tanggalLahir) return false;
+                const parts = s.tanggalLahir.split('-');
+                if (parts.length < 3) return false;
+                return parseInt(parts[1], 10) === curMonth && parseInt(parts[2], 10) === curDate;
+            });
+
+            const upcomingThisMonth = appData.siswa.filter(s => {
+                if (!s.tanggalLahir) return false;
+                const parts = s.tanggalLahir.split('-');
+                if (parts.length < 3) return false;
+                return parseInt(parts[1], 10) === curMonth;
+            }).sort((a, b) => parseInt(a.tanggalLahir.split('-')[2], 10) - parseInt(b.tanggalLahir.split('-')[2], 10));
+
+            const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"][curMonth - 1];
+
+            let html = `
+                <div class="bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-purple-500/10 dark:from-pink-950/40 dark:via-rose-950/40 dark:to-purple-950/40 rounded-3xl p-6 sm:p-8 border border-pink-200 dark:border-pink-900/50 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-2xl bg-pink-500 text-white flex items-center justify-center text-lg shadow-md shadow-pink-500/30">
+                                <i class="fa-solid fa-cake-candles"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-slate-800 dark:text-slate-100 text-base sm:text-lg">Kalender Ulang Tahun Siswa</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Merayakan momen istimewa anggota Kelas VII A pada bulan ${namaBulan}</p>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 bg-pink-100 dark:bg-pink-950 text-pink-600 dark:text-pink-300 rounded-full text-xs font-bold uppercase tracking-wider">
+                            ${namaBulan}
+                        </span>
+                    </div>
+            `;
+
+            if (birthdayToday.length > 0) {
+                html += `
+                    <div class="bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl p-6 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-pulse-glow">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden ring-4 ring-white/30 shrink-0">
+                                <img src="${birthdayToday[0].foto}" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <span class="px-2.5 py-0.5 bg-white/20 backdrop-blur-md rounded-md text-[10px] font-bold uppercase tracking-wide">🎉 Selamat Ulang Tahun Hari Ini!</span>
+                                <h4 class="text-xl font-black mt-1">${birthdayToday.map(s => s.nama).join(', ')}</h4>
+                                <p class="text-xs text-pink-100 mt-0.5">Semoga panjang umur, sehat selalu, dan makin berprestasi di Kelas VII A!</p>
+                            </div>
+                        </div>
+                        <button onclick="showToast('🎉 Selamat Ulang Tahun dari Kelas VII A!', 'success')" class="px-4 py-2.5 bg-white text-pink-600 hover:bg-pink-50 rounded-xl text-xs font-extrabold shadow-md shrink-0">
+                            Kirim Ucapan 🎂
+                        </button>
+                    </div>
+                `;
+            }
+
+            if (upcomingThisMonth.length > 0) {
+                html += `
+                    <div class="space-y-3">
+                        <span class="text-xs font-bold text-slate-600 dark:text-slate-300 block uppercase tracking-wider">Ulang Tahun Bulan Ini (${namaBulan}):</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                            ${upcomingThisMonth.map(s => {
+                                const day = parseInt(s.tanggalLahir.split('-')[2], 10);
+                                const isToday = day === curDate;
+                                return `
+                                    <div class="flex items-center space-x-3 p-3 rounded-2xl ${isToday ? 'bg-pink-100 dark:bg-pink-950/80 border-2 border-pink-500' : 'bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800'} shadow-sm">
+                                        <img src="${s.foto}" class="w-10 h-10 rounded-xl object-cover shrink-0">
+                                        <div class="truncate">
+                                            <h5 class="text-xs font-bold text-slate-800 dark:text-slate-100 truncate">${s.nama}</h5>
+                                            <span class="text-[10px] font-semibold text-pink-600 dark:text-pink-400"><i class="fa-solid fa-gift mr-1"></i> ${day} ${namaBulan} ${isToday ? '🎉 (HARI INI!)' : ''}</span>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                html += `<p class="text-xs text-slate-400 italic">Tidak ada siswa yang berulang tahun pada bulan ${namaBulan}.</p>`;
+            }
+
+            html += `</div>`;
+            birthdaySec.innerHTML = html;
+        }
+
+        function renderJadwal() {
+            const container = document.getElementById('jadwalContainer');
+            const list = appData.jadwal || defaultData.jadwal;
+            const bgGradients = [
+                'from-skycustom-500 to-blue-600',
+                'from-indigo-500 to-purple-600',
+                'from-emerald-500 to-teal-600',
+                'from-amber-500 to-orange-600',
+                'from-rose-500 to-pink-600'
+            ];
+
+            container.innerHTML = list.map((j, idx) => `
+                <div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
+                    <div class="bg-gradient-to-r ${bgGradients[idx % bgGradients.length]} p-4 text-white flex justify-between items-center">
+                        <h3 class="font-bold text-base tracking-wide">${j.hari}</h3>
+                        <i class="fa-solid fa-clock opacity-75 text-sm"></i>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        ${j.pel.map((p, pIdx) => `
+                            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 text-xs">
+                                <span class="font-bold text-slate-700 dark:text-slate-200">${pIdx + 1}. ${p}</span>
+                                <span class="text-[10px] font-semibold text-slate-400 bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border dark:border-slate-700">Jam ke-${pIdx + 1}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderOrganisasi() {
+            const container = document.getElementById('organisasiTreeContainer');
+            if (!container) return;
+
+            const list = appData.organisasi || [];
+
+            const wali = list.filter(o => o.jabatan.toLowerCase().includes('wali') || o.jabatan.toLowerCase().includes('pembimbing'));
+            const ketua = list.filter(o => o.jabatan.toLowerCase().includes('ketua') && !o.jabatan.toLowerCase().includes('wakil') && !o.jabatan.toLowerCase().includes('seksi'));
+            const wakil = list.filter(o => o.jabatan.toLowerCase().includes('wakil'));
+            const sekretaris = list.filter(o => o.jabatan.toLowerCase().includes('sekretaris'));
+            const bendahara = list.filter(o => o.jabatan.toLowerCase().includes('bendahara'));
+            const seksi = list.filter(o => 
+                !wali.includes(o) && 
+                !ketua.includes(o) && 
+                !wakil.includes(o) && 
+                !sekretaris.includes(o) && 
+                !bendahara.includes(o)
+            );
+
+            function getRoleBadgeColor(jabatan) {
+                const j = jabatan.toLowerCase();
+                if (j.includes('wali')) return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30';
+                if (j.includes('wakil')) return 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/30';
+                if (j.includes('ketua')) return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30';
+                if (j.includes('sekretaris')) return 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/30';
+                if (j.includes('bendahara')) return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30';
+                return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30';
+            }
+
+            let html = `<div class="space-y-8 max-w-5xl mx-auto">`;
+
+            // TIER 1: WALI KELAS
+            if (wali.length > 0) {
+                html += `
+                <div class="flex flex-col items-center">
+                    <span class="text-[11px] sm:text-xs font-bold text-amber-500 uppercase tracking-widest mb-3 flex items-center gap-2 bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/20">
+                        <i class="fa-solid fa-crown text-amber-500"></i> Pembimbing Utama Kelas
+                    </span>
+                    <div class="max-w-xs w-full">
+                        ${wali.map(w => `
+                            <div class="relative bg-gradient-to-b from-amber-500/15 via-white to-white dark:via-slate-900 dark:to-slate-900 rounded-3xl p-5 text-center shadow-xl border-2 border-amber-500/40 hover:border-amber-500 transition-all duration-300 group">
+                                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[10px] font-extrabold px-4 py-0.5 rounded-full shadow-md flex items-center gap-1.5 whitespace-nowrap">
+                                    <i class="fa-solid fa-star text-[9px]"></i> WALI KELAS <i class="fa-solid fa-star text-[9px]"></i>
+                                </div>
+                                <div class="w-24 h-24 mx-auto mt-2 mb-3 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-amber-500 to-yellow-300 shadow-lg">
+                                    <img src="${w.foto}" class="w-full h-full object-cover rounded-full">
+                                </div>
+                                <h3 class="font-extrabold text-slate-800 dark:text-slate-100 text-base group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">${w.nama}</h3>
+                                <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">${w.jabatan}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <div class="w-0.5 h-8 bg-gradient-to-b from-amber-500 to-skycustom-500"></div>
+                </div>
+                `;
+            }
+
+            // TIER 2: KETUA & WAKIL KETUA (SIDE BY SIDE HORIZONTAL)
+            const pimpinanInti = [...ketua, ...wakil];
+            if (pimpinanInti.length > 0) {
+                html += `
+                <div class="flex flex-col items-center w-full">
+                    <span class="text-[11px] sm:text-xs font-bold text-skycustom-500 uppercase tracking-widest mb-3 flex items-center gap-2 bg-skycustom-500/10 px-3.5 py-1 rounded-full border border-skycustom-500/20">
+                        <i class="fa-solid fa-user-tie text-skycustom-400"></i> Pimpinan Inti Kelas (Ketua & Wakil)
+                    </span>
+
+                    <div class="relative w-full max-w-2xl px-12 mb-4 hidden sm:block">
+                        <div class="w-full h-0.5 bg-gradient-to-r from-blue-500 via-skycustom-400 to-indigo-500"></div>
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-4 bg-skycustom-500 -mt-4"></div>
+                        <div class="absolute top-0 left-12 w-0.5 h-3 bg-blue-500"></div>
+                        <div class="absolute top-0 right-12 w-0.5 h-3 bg-indigo-500"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 sm:gap-6 w-full max-w-2xl">
+                        ${pimpinanInti.map(p => {
+                            const isWakil = p.jabatan.toLowerCase().includes('wakil');
+                            const borderGlow = isWakil 
+                                ? 'hover:border-indigo-500/80 hover:shadow-indigo-500/20' 
+                                : 'hover:border-blue-500/80 hover:shadow-blue-500/20';
+                            const ringColor = isWakil
+                                ? 'ring-indigo-100 dark:ring-indigo-950/80'
+                                : 'ring-blue-100 dark:ring-blue-950/80';
+                            return `
+                            <div class="relative bg-white dark:bg-slate-900 rounded-3xl p-4 sm:p-5 text-center shadow-md border border-slate-200 dark:border-slate-800 ${borderGlow} hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 flex flex-col items-center justify-between">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-2 sm:mb-3 rounded-2xl overflow-hidden ring-4 ${ringColor} shadow-md shrink-0">
+                                    <img src="${p.foto}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border ${getRoleBadgeColor(p.jabatan)} mb-2">
+                                    <i class="fa-solid ${isWakil ? 'fa-user-shield text-indigo-500' : 'fa-crown text-amber-500'}"></i>
+                                    <span>${p.jabatan}</span>
+                                </span>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm group-hover:text-skycustom-500 transition-colors line-clamp-1">${p.nama}</h3>
+                            </div>
+                        `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <div class="flex justify-center my-2">
+                    <div class="w-0.5 h-8 bg-gradient-to-b from-skycustom-500 via-indigo-500/50 to-slate-300 dark:to-slate-700"></div>
+                </div>
+                `;
+            }
+
+            // TIER 3: DIVISI SEKRETARIS & BENDAHARA
+            if (sekretaris.length > 0 || bendahara.length > 0) {
+                html += `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    ${sekretaris.length > 0 ? `
+                        <div class="bg-slate-50/90 dark:bg-slate-900/60 p-5 rounded-3xl border border-slate-200/80 dark:border-slate-800 space-y-3">
+                            <div class="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold text-xs shrink-0">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Tim Sekretaris</h4>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400">Pengelola absensi & jurnal kelas</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                ${sekretaris.map(s => `
+                                    <div class="bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm text-center hover:shadow-md transition-all group">
+                                        <img src="${s.foto}" class="w-14 h-14 rounded-full mx-auto mb-2 object-cover ring-2 ring-sky-200 dark:ring-sky-900">
+                                        <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 mb-1">${s.jabatan}</span>
+                                        <h5 class="font-bold text-slate-800 dark:text-slate-100 text-xs truncate">${s.nama}</h5>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${bendahara.length > 0 ? `
+                        <div class="bg-slate-50/90 dark:bg-slate-900/60 p-5 rounded-3xl border border-slate-200/80 dark:border-slate-800 space-y-3">
+                            <div class="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-xs shrink-0">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Tim Bendahara</h4>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400">Pengelola kas & keuangan kelas</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                ${bendahara.map(b => `
+                                    <div class="bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm text-center hover:shadow-md transition-all group">
+                                        <img src="${b.foto}" class="w-14 h-14 rounded-full mx-auto mb-2 object-cover ring-2 ring-emerald-200 dark:ring-emerald-900">
+                                        <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 mb-1">${b.jabatan}</span>
+                                        <h5 class="font-bold text-slate-800 dark:text-slate-100 text-xs truncate">${b.nama}</h5>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+                `;
+            }
+
+            // TIER 4: SEKSI-SEKSI
+            if (seksi.length > 0) {
+                html += `
+                <div class="space-y-3 bg-slate-50/90 dark:bg-slate-900/60 p-5 rounded-3xl border border-slate-200/80 dark:border-slate-800">
+                    <div class="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold text-xs shrink-0">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Seksi & Koordinator Bidang</h4>
+                            <p class="text-[10px] text-slate-500 dark:text-slate-400">Koordinator kebersihan, ketertiban & acara</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                        ${seksi.map(s => `
+                            <div class="bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm text-center hover:shadow-md transition-all group">
+                                <img src="${s.foto}" class="w-14 h-14 rounded-full mx-auto mb-2 object-cover ring-2 ring-purple-200 dark:ring-purple-900">
+                                <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 mb-1">${s.jabatan}</span>
+                                <h5 class="font-bold text-slate-800 dark:text-slate-100 text-xs truncate">${s.nama}</h5>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                `;
+            }
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        // Helper to format badge tag style
+        function renderBadgeTag(badgeTitle) {
+            const found = BADGE_PRESETS.find(b => b.title.toLowerCase() === badgeTitle.toLowerCase());
+            const icon = found ? found.icon : 'fa-award';
+            const color = found ? found.color : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-300';
+            return `
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold border ${color}">
+                    <i class="fa-solid ${icon}"></i> ${badgeTitle}
+                </span>
+            `;
+        }
+
+        function renderSiswa() {
+            const grid = document.getElementById('siswaGrid');
+            const searchVal = document.getElementById('siswaSearchInput').value.toLowerCase().trim();
+            const filtered = appData.siswa.filter(s => {
+                const lencanaStr = (s.lencana || []).join(' ').toLowerCase();
+                return s.nama.toLowerCase().includes(searchVal) || 
+                    (s.hobi && s.hobi.toLowerCase().includes(searchVal)) ||
+                    (s.citaCita && s.citaCita.toLowerCase().includes(searchVal)) ||
+                    lencanaStr.includes(searchVal);
+            });
+
+            document.getElementById('siswaBadgeCount').innerText = `${filtered.length} Siswa`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 text-xs">
+                        <i class="fa-solid fa-user-slash text-3xl mb-2 text-slate-300 dark:text-slate-700"></i>
+                        <p>Tidak ada data siswa yang cocok dengan pencarian.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(s => {
+                const isPengurus = appData.organisasi.find(o => o.nama.toLowerCase() === s.nama.toLowerCase());
+                const points = s.poin || 100;
+                const badges = s.lencana || [];
+
+                return `
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between p-4 space-y-3">
+                        <div class="relative w-full h-44 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800">
+                            <img src="${s.foto}" class="w-full h-full object-cover">
+                            ${isPengurus ? `<span class="absolute top-2 right-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow">${isPengurus.jabatan}</span>` : ''}
+                            <span class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-md text-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                                ⭐ ${points} Poin
+                            </span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm leading-snug">${s.nama}</h3>
+                            
+                            <!-- Badges Tag Showcase -->
+                            <div class="flex flex-wrap gap-1">
+                                ${badges.length > 0 ? badges.slice(0, 2).map(b => renderBadgeTag(b)).join('') : '<span class="text-[10px] text-slate-400 italic">Belum ada lencana</span>'}
+                                ${badges.length > 2 ? `<span class="text-[10px] text-slate-400 font-bold self-center">+${badges.length - 2} lagi</span>` : ''}
+                            </div>
+
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2">${s.bio}</p>
+                        </div>
+                        <button onclick="openStudentModal('${s.id}')" class="w-full py-2 bg-skycustom-50 dark:bg-skycustom-950/60 text-skycustom-600 dark:text-skycustom-400 text-xs font-bold rounded-xl transition-colors">
+                            Lihat Profil & Lencana
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openStudentModal(id) {
+            const s = appData.siswa.find(x => x.id === id);
+            if (!s) return;
+            const isPengurus = appData.organisasi.find(o => o.nama.toLowerCase() === s.nama.toLowerCase());
+            const points = s.poin || 100;
+            const badges = s.lencana || [];
+
+            const content = document.getElementById('studentModalContent');
+            content.innerHTML = `
+                <div class="relative h-64 bg-slate-900">
+                    <img src="${s.foto}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-6 right-6 text-white space-y-1">
+                        <div class="flex items-center gap-2">
+                            ${isPengurus ? `<span class="px-2.5 py-0.5 bg-amber-500 rounded-md text-[10px] font-bold uppercase">${isPengurus.jabatan}</span>` : ''}
+                            <span class="px-2.5 py-0.5 bg-amber-400/20 text-amber-300 border border-amber-400/30 rounded-md text-[10px] font-extrabold">⭐ ${points} Poin Apresiasi</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold">${s.nama}</h3>
+                    </div>
+                </div>
+                <div class="p-6 space-y-4 text-xs">
+                    <!-- Badges Section in Modal -->
+                    <div class="p-3.5 bg-amber-50/80 dark:bg-amber-950/40 rounded-2xl border border-amber-200 dark:border-amber-900/40 space-y-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-medal text-amber-500"></i> Lencana Apresiasi Digital (${badges.length})
+                        </span>
+                        <div class="flex flex-wrap gap-1.5">
+                            ${badges.length > 0 ? badges.map(b => renderBadgeTag(b)).join('') : '<span class="text-[11px] text-slate-400 italic">Siswa belum memiliki lencana.</span>'}
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Jenis Kelamin</span>
+                            <span class="font-bold text-slate-800 dark:text-slate-200">${s.gender || 'Laki-laki'}</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                            <div class="text-[10px] text-slate-400 font-bold uppercase">Cita-Cita</div>
+                            <div class="font-bold text-slate-800 dark:text-slate-200 truncate">${s.citaCita || '-'}</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                        <span class="text-[10px] text-slate-400 font-bold block uppercase">Tanggal Lahir</span>
+                        <span class="font-bold text-pink-600 dark:text-pink-400">${s.tanggalLahir || '-'}</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                        <span class="text-[10px] text-slate-400 font-bold block uppercase">Hobi / Minat</span>
+                        <span class="font-bold text-slate-800 dark:text-slate-200">${s.hobi || '-'}</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-slate-400 font-bold block uppercase mb-1">Biografi Siswa</span>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700">${s.bio}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('studentDetailModal').classList.remove('hidden');
+        }
+
+        function closeStudentModal() {
+            document.getElementById('studentDetailModal').classList.add('hidden');
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            if (!appData.quiz || !appData.quiz.enabled) {
+                container.innerHTML = `
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-12 text-center max-w-lg mx-auto shadow-sm border border-slate-100 dark:border-slate-800 space-y-4">
+                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center text-3xl mx-auto">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">Kuis Sedang Nonaktif</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Kuis interaktif kelas saat ini sedang ditutup oleh admin. Silahkan cek kembali nanti!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const qList = appData.quiz.questions || [];
+            if (qList.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-12 text-center max-w-lg mx-auto shadow-sm border border-slate-100 dark:border-slate-800 space-y-2">
+                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100">Belum Ada Pertanyaan</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Admin belum menambahkan daftar soal kuis.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (isQuizSubmitted) {
+                let score = 0;
+                qList.forEach((q, idx) => {
+                    if (userQuizAnswers[idx] === q.correctAnswer) score++;
+                });
+                const finalScore = Math.round((score / qList.length) * 100);
+
+                container.innerHTML = `
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-2xl mx-auto shadow-md border border-slate-100 dark:border-slate-800 text-center space-y-6 animate-float">
+                        <div class="w-20 h-20 bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center text-4xl mx-auto">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">Hasil Kuis Kebersamaan</span>
+                            <h3 class="text-3xl font-black text-slate-800 dark:text-slate-100 mt-1">Skor Kamu: ${finalScore} / 100</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Kamu berhasil menjawab benar ${score} dari ${qList.length} soal!</p>
+                        </div>
+
+                        <div class="space-y-3 text-left border-t border-slate-100 dark:border-slate-800 pt-6 text-xs">
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-sm">Pembahasan Jawaban:</h4>
+                            ${qList.map((q, idx) => {
+                                const isCorrect = userQuizAnswers[idx] === q.correctAnswer;
+                                return `
+                                    <div class="p-3.5 rounded-2xl ${isCorrect ? 'bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/40' : 'bg-rose-50 dark:bg-rose-950/40 border border-rose-100 dark:border-rose-900/40'} space-y-1">
+                                        <p class="font-bold text-slate-800 dark:text-slate-100">${idx + 1}. ${q.question}</p>
+                                        <p class="text-[11px] ${isCorrect ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}">
+                                            Jawaban Kamu: <b>${q.options[userQuizAnswers[idx]] || 'Tidak dijawab'}</b> ${isCorrect ? '✓' : '✗'}
+                                        </p>
+                                        ${!isCorrect ? `<p class="text-[11px] text-slate-600 dark:text-slate-400">Kunci Benar: <b>${q.options[q.correctAnswer]}</b></p>` : ''}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+
+                        <button onclick="restartQuiz()" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl text-xs font-bold shadow-lg shadow-purple-500/20 transition-all">
+                            Coba Kuis Lagi
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = qList[currentQuizIndex];
+            container.innerHTML = `
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 max-w-2xl mx-auto shadow-sm border border-slate-100 dark:border-slate-800 space-y-6">
+                    <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-4">
+                        <div>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 rounded-full text-xs font-bold uppercase">${appData.quiz.title}</span>
+                            <p class="text-xs text-slate-400 dark:text-slate-400 mt-1">${appData.quiz.desc}</p>
+                        </div>
+                        <span class="text-xs font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-3 py-1.5 rounded-xl border border-purple-100 dark:border-purple-900">Soal ${currentQuizIndex + 1} dari ${qList.length}</span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug">${currentQuizIndex + 1}. ${q.question}</h3>
+                    </div>
+
+                    <div class="space-y-3">
+                        ${q.options.map((opt, oIdx) => {
+                            const isSelected = userQuizAnswers[currentQuizIndex] === oIdx;
+                            return `
+                                <button onclick="selectQuizAnswer(${oIdx})" class="w-full text-left p-4 rounded-2xl border ${isSelected ? 'border-purple-600 bg-purple-50/70 dark:bg-purple-950/60 text-purple-900 dark:text-purple-200 font-bold' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-300'} text-xs flex items-center justify-between transition-all">
+                                    <span><b class="mr-2 text-purple-600 dark:text-purple-400">${['A', 'B', 'C', 'D'][oIdx]}.</b> ${opt}</span>
+                                    ${isSelected ? '<i class="fa-solid fa-circle-check text-purple-600 dark:text-purple-400 text-sm"></i>' : ''}
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <button onclick="prevQuizQuestion()" ${currentQuizIndex === 0 ? 'disabled class="opacity-40 cursor-not-allowed text-xs font-bold text-slate-400 px-4 py-2"' : 'class="text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-800 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-xl"'}>
+                            &larr; Sebelum
+                        </button>
+
+                        ${currentQuizIndex === qList.length - 1 ? `
+                            <button onclick="submitQuiz()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md">
+                                Selesaikan Kuis
+                            </button>
+                        ` : `
+                            <button onclick="nextQuizQuestion()" class="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold shadow-md">
+                                Selanjutnya &rarr;
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectQuizAnswer(optIndex) {
+            userQuizAnswers[currentQuizIndex] = optIndex;
+            renderQuiz();
+        }
+
+        function nextQuizQuestion() {
+            if (currentQuizIndex < (appData.quiz.questions.length - 1)) {
+                currentQuizIndex++;
+                renderQuiz();
+            }
+        }
+
+        function prevQuizQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                renderQuiz();
+            }
+        }
+
+        function submitQuiz() {
+            isQuizSubmitted = true;
+            renderQuiz();
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            userQuizAnswers = [];
+            isQuizSubmitted = false;
+            renderQuiz();
+        }
+
+        function renderAspirasi() {
+            const listContainer = document.getElementById('aspirasiListContainer');
+            if (!listContainer) return;
+
+            const list = appData.aspirasi || [];
+            document.getElementById('aspirasiBadgeCount').innerText = `${list.length} Masukan`;
+
+            if (list.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-12 text-slate-400 text-xs">
+                        <i class="fa-solid fa-box-open text-3xl mb-2 text-slate-300 dark:text-slate-700"></i>
+                        <p>Belum ada aspirasi atau masukan yang dikirimkan. Jadilah yang pertama!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = list.map(a => `
+                <div class="bg-slate-50 dark:bg-slate-800/60 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-3">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-bold text-slate-800 dark:text-slate-100 text-xs">${a.anonim ? 'Siswa VII A (Anonim)' : a.nama}</span>
+                            <span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold ${getAspirasiBadgeColor(a.kategori)}">${a.kategori}</span>
+                        </div>
+                        <span class="text-[10px] text-slate-400 font-semibold">${a.tanggal}</span>
+                    </div>
+
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800 font-medium">"${a.pesan}"</p>
+
+                    ${a.balasanAdmin ? `
+                        <div class="bg-amber-500/10 dark:bg-amber-950/40 border border-amber-500/30 p-3 rounded-xl space-y-1">
+                            <span class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-reply"></i> Tanggapan Pengurus / Wali Kelas:
+                            </span>
+                            <p class="text-xs text-slate-800 dark:text-slate-200">${a.balasanAdmin}</p>
+                        </div>
+                    ` : `
+                        <div class="flex items-center text-[10px] font-semibold text-slate-400 italic">
+                            <i class="fa-solid fa-hourglass-half mr-1 text-amber-500"></i> Menunggu tanggapan pengurus kelas
+                        </div>
+                    `}
+                </div>
+            `).join('');
+        }
+
+        function getAspirasiBadgeColor(kategori) {
+            if (kategori === 'Saran Kelas') return 'bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-300';
+            if (kategori === 'Ide Acara') return 'bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-300';
+            if (kategori === 'Pesan Apresiasi') return 'bg-pink-100 dark:bg-pink-950 text-pink-600 dark:text-pink-300';
+            return 'bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-300';
+        }
+
+        function toggleAnonimInput() {
+            const isAnonim = document.getElementById('aspIsAnonim').checked;
+            const container = document.getElementById('aspNamaContainer');
+            if (isAnonim) {
+                container.classList.add('hidden');
+            } else {
+                container.classList.remove('hidden');
+            }
+        }
+
+        function handleAspirasiSubmit(e) {
+            e.preventDefault();
+            if (!appData.aspirasi) appData.aspirasi = [];
+
+            const kategori = document.getElementById('aspKategori').value;
+            const anonim = document.getElementById('aspIsAnonim').checked;
+            const namaInput = document.getElementById('aspNamaInput').value.trim();
+            const pesan = document.getElementById('aspPesanInput').value.trim();
+
+            if (!anonim && !namaInput) {
+                showToast("Mohon isi nama Anda atau centang opsi Anonim!", "error");
+                return;
+            }
+
+            const newAspirasi = {
+                id: `asp_${Date.now()}`,
+                nama: anonim ? "Siswa VII A" : namaInput,
+                anonim: anonim,
+                kategori: kategori,
+                pesan: pesan,
+                tanggal: new Date().toISOString().split('T')[0],
+                status: "Baru",
+                balasanAdmin: ""
+            };
+
+            appData.aspirasi.unshift(newAspirasi);
+            saveData();
+
+            document.getElementById('aspPesanInput').value = '';
+            document.getElementById('aspNamaInput').value = '';
+            document.getElementById('aspIsAnonim').checked = false;
+            toggleAnonimInput();
+
+            showToast("Aspirasi Anda berhasil dikirimkan!", "success");
+        }
+
+        function filterAlbum(kategori) {
+            const grid = document.getElementById('albumGrid');
+            const filterBtns = document.querySelectorAll('.album-filter-btn');
+            
+            filterBtns.forEach(btn => {
+                if (btn.innerText.includes(kategori)) {
+                    btn.className = "album-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-skycustom-500 text-white";
+                } else {
+                    btn.className = "album-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700";
+                }
+            });
+
+            const filtered = (kategori === 'Semua') ? appData.album : appData.album.filter(a => a.kategori === kategori || (kategori === 'Video' && a.tipeMedia === 'Video'));
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-xs">Belum ada foto/video dalam kategori ini</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(a => {
+                const isVideo = a.tipeMedia === 'Video' || a.kategori === 'Video';
+                return `
+                    <div onclick="openLightbox('${a.id}')" class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all group cursor-pointer flex flex-col justify-between">
+                        <div class="h-48 relative overflow-hidden bg-slate-900">
+                            ${isVideo ? `
+                                <div class="w-full h-full flex items-center justify-center bg-slate-900 text-white group-hover:scale-105 transition-transform duration-300">
+                                    <i class="fa-solid fa-circle-play text-5xl text-skycustom-400 animate-pulse"></i>
+                                </div>
+                            ` : `
+                                <img src="${a.url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            `}
+                            <span class="absolute top-3 right-3 ${isVideo ? 'bg-indigo-600' : 'bg-black/50'} backdrop-blur-md text-white text-[10px] px-2.5 py-0.5 rounded-full font-bold">
+                                ${isVideo ? '<i class="fa-solid fa-video mr-1"></i> Video' : a.kategori}
+                            </span>
+                        </div>
+                        <div class="p-4 space-y-1">
+                            <span class="text-[10px] font-semibold text-slate-400">${a.tanggal}</span>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm leading-snug line-clamp-1">${a.judul}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">${a.deskripsi}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openLightbox(id) {
+            const item = appData.album.find(a => a.id === id);
+            if (!item) return;
+
+            const container = document.getElementById('lightboxContentContainer');
+            const isVideo = item.tipeMedia === 'Video' || item.kategori === 'Video';
+
+            if (isVideo) {
+                let videoEmbedUrl = item.url;
+                if (item.url.includes('youtube.com/watch?v=')) {
+                    const videoId = item.url.split('v=')[1]?.split('&')[0];
+                    videoEmbedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                } else if (item.url.includes('youtu.be/')) {
+                    const videoId = item.url.split('youtu.be/')[1]?.split('?')[0];
+                    videoEmbedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                }
+
+                container.innerHTML = `
+                    <div class="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black mb-4">
+                        <iframe src="${videoEmbedUrl}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="text-white text-center space-y-1">
+                        <h3 class="text-lg font-bold">${item.judul}</h3>
+                        <p class="text-xs text-slate-300 max-w-xl">${item.deskripsi}</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <img src="${item.url}" class="max-h-[75vh] w-auto rounded-2xl object-contain shadow-2xl mb-4">
+                    <div class="text-white text-center space-y-1">
+                        <h3 class="text-lg font-bold">${item.judul}</h3>
+                        <p class="text-xs text-slate-300 max-w-xl">${item.deskripsi}</p>
+                    </div>
+                `;
+            }
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+            document.getElementById('lightboxContentContainer').innerHTML = '';
+        }
+
+        function openAuthModal() {
+            if (appData.admin.isLoggedIn) {
+                openAdminDashboard();
+            } else {
+                document.getElementById('authModal').classList.remove('hidden');
+            }
+        }
+
+        function openAdminModalFromLanding() {
+            navigateToMainApp('beranda');
+            setTimeout(() => {
+                openAuthModal();
+            }, 400);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const u = document.getElementById('loginUsername').value;
+            const p = document.getElementById('loginPassword').value;
+
+            if (u === appData.admin.username && p === appData.admin.password) {
+                appData.admin.isLoggedIn = true;
+                saveData();
+                closeAuthModal();
+                openAdminDashboard();
+                showToast("Login admin berhasil!", "success");
+            } else {
+                showToast("Username atau password salah!", "error");
+            }
+        }
+
+        function openAdminDashboard() {
+            if (!appData.admin.isLoggedIn) return;
+            switchAdminTab('homeprofil');
+            renderAdminLists();
+            
+            document.getElementById('admHomeTitle').value = appData.home.title || '';
+            document.getElementById('admHomeSlogan').value = appData.home.slogan || '';
+            document.getElementById('admHomeDesc').value = appData.home.desc || '';
+            document.getElementById('admProfilMotto').value = appData.profil.motto || '';
+            document.getElementById('admHomeFoto').value = appData.home.foto || '';
+
+            document.getElementById('admBirthdayEnabled').value = appData.birthday ? String(appData.birthday.enabled) : "true";
+
+            document.getElementById('admQuizEnabled').value = appData.quiz ? String(appData.quiz.enabled) : "true";
+            document.getElementById('admQuizTitle').value = appData.quiz ? appData.quiz.title : '';
+            document.getElementById('admQuizDesc').value = appData.quiz ? appData.quiz.desc : '';
+
+            document.getElementById('admChangeUsername').value = appData.admin.username;
+            document.getElementById('admChangePassword').value = appData.admin.password;
+
+            document.getElementById('adminDashboardModal').classList.remove('hidden');
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('adminDashboardModal').classList.add('hidden');
+        }
+
+        function logoutAdmin() {
+            appData.admin.isLoggedIn = false;
+            saveData();
+            closeAdminDashboard();
+            showToast("Anda telah logout dari portal admin", "info");
+        }
+
+        function switchAdminTab(tabId) {
+            activeAdminTab = tabId;
+            const tabs = ['homeprofil', 'organisasi', 'siswa', 'quiz', 'album', 'aspirasi', 'akun'];
+            tabs.forEach(t => {
+                const sec = document.getElementById(`admSec-${t}`);
+                const btn = document.getElementById(`admTab-${t}`);
+                if (sec) {
+                    if (t === tabId) sec.classList.remove('hidden');
+                    else sec.classList.add('hidden');
+                }
+                if (btn) {
+                    if (t === tabId) {
+                        btn.className = "adm-tab-btn px-4 py-3 border-b-2 border-skycustom-500 text-skycustom-600 dark:text-skycustom-400 whitespace-nowrap";
+                    } else {
+                        btn.className = "adm-tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap";
+                    }
+                }
+            });
+        }
+
+        function saveBirthdayConfig(e) {
+            e.preventDefault();
+            if (!appData.birthday) appData.birthday = {};
+            appData.birthday.enabled = document.getElementById('admBirthdayEnabled').value === 'true';
+
+            saveData();
+            showToast("Pengaturan Kalender Ulang Tahun disimpan!", "success");
+        }
+
+        function saveHomeProfilAdmin(e) {
+            e.preventDefault();
+            appData.home.title = document.getElementById('admHomeTitle').value;
+            appData.home.slogan = document.getElementById('admHomeSlogan').value;
+            appData.home.desc = document.getElementById('admHomeDesc').value;
+            appData.profil.motto = document.getElementById('admProfilMotto').value;
+            appData.home.foto = document.getElementById('admHomeFoto').value;
+            appData.profil.foto = document.getElementById('admHomeFoto').value;
+
+            saveData();
+            showToast("Beranda & Profil berhasil diperbarui", "success");
+        }
+
+        function saveQuizConfig(e) {
+            e.preventDefault();
+            if (!appData.quiz) appData.quiz = {};
+            appData.quiz.enabled = document.getElementById('admQuizEnabled').value === 'true';
+            appData.quiz.title = document.getElementById('admQuizTitle').value;
+            appData.quiz.desc = document.getElementById('admQuizDesc').value;
+
+            saveData();
+            showToast("Pengaturan Fun Quiz berhasil disimpan", "success");
+        }
+
+        function handleAccountChange(e) {
+            e.preventDefault();
+            appData.admin.username = document.getElementById('admChangeUsername').value;
+            appData.admin.password = document.getElementById('admChangePassword').value;
+
+            saveData();
+            showToast("Username & Password admin diperbarui!", "success");
+        }
+
+        function renderAdminLists() {
+            // Organisasi List
+            const orgList = document.getElementById('admOrganisasiList');
+            orgList.innerHTML = appData.organisasi.map(o => `
+                <div class="flex items-center justify-between p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+                    <div class="flex items-center space-x-3">
+                        <img src="${o.foto}" class="w-9 h-9 rounded-lg object-cover">
+                        <div>
+                            <span class="font-bold text-slate-800 dark:text-slate-100 block">${o.nama}</span>
+                            <span class="text-[10px] text-skycustom-600 dark:text-skycustom-400 font-semibold">${o.jabatan}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="editItem('organisasi', '${o.id}')" class="p-1.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-lg"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteItem('organisasi', '${o.id}')" class="p-1.5 bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 rounded-lg"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Siswa List with Points and Badges Overview
+            const siswaList = document.getElementById('admSiswaList');
+            siswaList.innerHTML = appData.siswa.map(s => {
+                const points = s.poin || 100;
+                const badges = s.lencana || [];
+                return `
+                    <div class="flex items-center justify-between p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs gap-2">
+                        <div class="flex items-center space-x-3 truncate">
+                            <img src="${s.foto}" class="w-9 h-9 rounded-lg object-cover shrink-0">
+                            <div class="truncate">
+                                <div class="flex items-center gap-1.5 truncate">
+                                    <span class="font-bold text-slate-800 dark:text-slate-100 block truncate">${s.nama}</span>
+                                    <span class="text-[10px] font-extrabold text-amber-500 bg-amber-50 dark:bg-amber-950 px-1.5 py-0.5 rounded border border-amber-300 dark:border-amber-800 shrink-0">⭐ ${points} Poin</span>
+                                </div>
+                                <span class="text-[10px] text-slate-400 block truncate">Lencana: ${badges.length > 0 ? badges.join(', ') : 'Belum Ada'}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 shrink-0">
+                            <button onclick="editItem('siswa', '${s.id}')" class="px-2.5 py-1.5 bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 hover:bg-amber-100 rounded-lg font-bold text-[11px] flex items-center gap-1">
+                                <i class="fa-solid fa-medal"></i> Edit Poin & Lencana
+                            </button>
+                            <button onclick="deleteItem('siswa', '${s.id}')" class="p-1.5 bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 rounded-lg"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Quiz Questions List
+            const qList = document.getElementById('admQuizQuestionsList');
+            const questions = appData.quiz?.questions || [];
+            qList.innerHTML = questions.map((q, idx) => `
+                <div class="p-3.5 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 text-xs space-y-2">
+                    <div class="flex justify-between items-start">
+                        <span class="font-bold text-slate-800 dark:text-slate-100">${idx + 1}. ${q.question}</span>
+                        <div class="flex space-x-1 shrink-0">
+                            <button onclick="openQuizQuestionModal('${q.id}')" class="p-1 bg-white dark:bg-slate-800 border dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-md"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteQuizQuestion('${q.id}')" class="p-1 bg-rose-50 dark:bg-rose-950/50 border dark:border-rose-900/50 text-rose-600 dark:text-rose-400 rounded-md"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-500 dark:text-slate-400">
+                        ${q.options.map((o, oIdx) => `<div class="${oIdx === q.correctAnswer ? 'font-bold text-emerald-600 dark:text-emerald-400' : ''}">${['A','B','C','D'][oIdx]}. ${o}</div>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // Album List
+            const albList = document.getElementById('admAlbumList');
+            albList.innerHTML = appData.album.map(a => `
+                <div class="flex items-center justify-between p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+                    <div class="flex items-center space-x-3 truncate">
+                        <div class="w-9 h-9 rounded-lg bg-slate-100 dark:bg-slate-900 shrink-0 overflow-hidden">
+                            <img src="${a.url}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="truncate">
+                            <span class="font-bold text-slate-800 dark:text-slate-100 block truncate">${a.judul}</span>
+                            <span class="text-[10px] text-skycustom-600 dark:text-skycustom-400 font-semibold">${a.kategori} &bull; ${a.tanggal}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 shrink-0">
+                        <button onclick="editItem('album', '${a.id}')" class="p-1.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-lg"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteItem('album', '${a.id}')" class="p-1.5 bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 rounded-lg"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            renderAdminAspirasiList();
+        }
+
+        function renderAdminAspirasiList() {
+            const listContainer = document.getElementById('admAspirasiList');
+            if (!listContainer) return;
+
+            const list = appData.aspirasi || [];
+
+            if (list.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-slate-400 italic">Belum ada aspirasi terkirim.</p>`;
+                return;
+            }
+
+            listContainer.innerHTML = list.map(a => `
+                <div class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-slate-800 dark:text-slate-100">${a.anonim ? 'Siswa VII A (Anonim)' : a.nama} &bull; <span class="text-amber-500">${a.kategori}</span></span>
+                        <span class="text-[10px] text-slate-400">${a.tanggal}</span>
+                    </div>
+                    <p class="p-2.5 bg-slate-50 dark:bg-slate-900 rounded-xl text-slate-700 dark:text-slate-300 font-medium">"${a.pesan}"</p>
+                    
+                    <div class="flex gap-2">
+                        <input type="text" id="admReply_${a.id}" value="${a.balasanAdmin || ''}" placeholder="Tuliskan tanggapan pengurus..." class="flex-grow px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900">
+                        <button onclick="saveAspirasiReply('${a.id}')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold shrink-0">Simpan Balasan</button>
+                        <button onclick="deleteAspirasi('${a.id}')" class="px-2.5 py-1.5 bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 rounded-xl font-bold shrink-0"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveAspirasiReply(id) {
+            const replyVal = document.getElementById(`admReply_${id}`).value.trim();
+            const idx = appData.aspirasi.findIndex(x => x.id === id);
+            if (idx !== -1) {
+                appData.aspirasi[idx].balasanAdmin = replyVal;
+                appData.aspirasi[idx].status = replyVal ? "Selesai" : "Baru";
+                saveData();
+                renderAdminAspirasiList();
+                showToast("Tanggapan aspirasi berhasil disimpan!", "success");
+            }
+        }
+
+        function deleteAspirasi(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus aspirasi ini?")) {
+                appData.aspirasi = appData.aspirasi.filter(x => x.id !== id);
+                saveData();
+                renderAdminAspirasiList();
+                showToast("Aspirasi berhasil dihapus", "info");
+            }
+        }
+
+        function openFormModal(type, editId = null) {
+            activeGenericType = type;
+            activeEditId = editId;
+            const fieldsContainer = document.getElementById('genericFormFields');
+            const title = document.getElementById('genericFormTitle');
+
+            if (type === 'organisasi') {
+                title.innerText = editId ? "Edit Pengurus Kelas" : "Tambah Pengurus Kelas";
+                const existing = editId ? appData.organisasi.find(x => x.id === editId) : {};
+                fieldsContainer.innerHTML = `
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Nama Lengkap</label>
+                        <input type="text" id="gfNama" required value="${existing.nama || ''}" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Jabatan</label>
+                        <input type="text" id="gfJabatan" required value="${existing.jabatan || ''}" placeholder="Contoh: Ketua Kelas / Wali Kelas" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Foto (URL / File Upload)</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="gfFoto" required value="${existing.foto || ''}" placeholder="https://..." class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                            <label class="cursor-pointer bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shrink-0">
+                                <i class="fa-solid fa-upload"></i>
+                                <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gfFoto')">
+                            </label>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'siswa') {
+                title.innerText = editId ? "Edit Profil & Lencana Siswa" : "Tambah Siswa Baru";
+                const existing = editId ? appData.siswa.find(x => x.id === editId) : {};
+                const currentBadges = existing.lencana || [];
+
+                fieldsContainer.innerHTML = `
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Nama Lengkap Siswa</label>
+                        <input type="text" id="gfNama" required value="${existing.nama || ''}" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="font-semibold block mb-1 text-xs">Jenis Kelamin</label>
+                            <select id="gfGender" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                                <option value="Laki-laki" ${existing.gender === 'Laki-laki' ? 'selected' : ''}>Laki-laki</option>
+                                <option value="Perempuan" ${existing.gender === 'Perempuan' ? 'selected' : ''}>Perempuan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-semibold block mb-1 text-xs">Poin Apresiasi ⭐</label>
+                            <input type="number" id="gfPoin" required value="${existing.poin !== undefined ? existing.poin : 100}" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs font-bold text-amber-600">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Tanggal Lahir Siswa</label>
+                        <input type="date" id="gfTanggalLahir" value="${existing.tanggalLahir || ''}" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+
+                    <!-- Badges Selection Checkboxes -->
+                    <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-2xl border border-amber-200 dark:border-amber-900/40 space-y-2">
+                        <label class="font-extrabold block text-xs text-amber-800 dark:text-amber-300">
+                            <i class="fa-solid fa-medal mr-1"></i> Berikan Lencana Apresiasi Digital:
+                        </label>
+                        <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+                            ${BADGE_PRESETS.map(b => {
+                                const checked = currentBadges.includes(b.title) ? 'checked' : '';
+                                return `
+                                    <label class="flex items-center space-x-1.5 cursor-pointer bg-white dark:bg-slate-900 p-2 rounded-xl border border-amber-100 dark:border-slate-800">
+                                        <input type="checkbox" name="gfBadges" value="${b.title}" ${checked} class="rounded text-amber-500">
+                                        <span class="font-semibold text-slate-700 dark:text-slate-200 truncate"><i class="fa-solid ${b.icon} mr-1 text-amber-500"></i>${b.title}</span>
+                                    </label>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Hobi / Minat</label>
+                        <input type="text" id="gfHobi" value="${existing.hobi || ''}" placeholder="Membaca, Olahraga..." class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Cita-Cita</label>
+                        <input type="text" id="gfCita" value="${existing.citaCita || ''}" placeholder="Dokter, Guru..." class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Bio / Deskripsi Singkat Siswa</label>
+                        <textarea id="gfBio" rows="2" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">${existing.bio || ''}</textarea>
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Foto Siswa (URL / File Upload)</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="gfFoto" required value="${existing.foto || ''}" placeholder="https://..." class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                            <label class="cursor-pointer bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shrink-0">
+                                <i class="fa-solid fa-upload"></i>
+                                <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gfFoto')">
+                            </label>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'album') {
+                title.innerText = editId ? "Edit Kenangan Album" : "Tambah Kenangan Baru";
+                const existing = editId ? appData.album.find(x => x.id === editId) : {};
+                fieldsContainer.innerHTML = `
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Judul Kenangan</label>
+                        <input type="text" id="gfJudul" required value="${existing.judul || ''}" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Tipe Media</label>
+                        <select id="gfTipe" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                            <option value="Foto" ${existing.tipeMedia === 'Foto' ? 'selected' : ''}>Foto</option>
+                            <option value="Video" ${existing.tipeMedia === 'Video' ? 'selected' : ''}>Video (YouTube / Embed)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Kategori</label>
+                        <select id="gfKategori" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                            <option value="Kegiatan" ${existing.kategori === 'Kegiatan' ? 'selected' : ''}>Kegiatan</option>
+                            <option value="Acara" ${existing.kategori === 'Acara' ? 'selected' : ''}>Acara</option>
+                            <option value="Foto Bersama" ${existing.kategori === 'Foto Bersama' ? 'selected' : ''}>Foto Bersama</option>
+                            <option value="Video" ${existing.kategori === 'Video' ? 'selected' : ''}>Video</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Tanggal</label>
+                        <input type="date" id="gfTanggal" required value="${existing.tanggal || new Date().toISOString().split('T')[0]}" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">Deskripsi</label>
+                        <textarea id="gfDesc" rows="2" class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">${existing.deskripsi || ''}</textarea>
+                    </div>
+                    <div>
+                        <label class="font-semibold block mb-1 text-xs">URL Foto/Video atau File Upload</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="gfFoto" required value="${existing.url || ''}" placeholder="https://..." class="w-full p-2 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-xl text-xs">
+                            <label class="cursor-pointer bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shrink-0">
+                                <i class="fa-solid fa-upload"></i>
+                                <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gfFoto')">
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('genericFormModal').classList.remove('hidden');
+        }
+
+        function closeGenericFormModal() {
+            document.getElementById('genericFormModal').classList.add('hidden');
+        }
+
+        function handleGenericFormSubmit(e) {
+            e.preventDefault();
+            const type = activeGenericType;
+            const editId = activeEditId;
+
+            if (type === 'organisasi') {
+                const nama = document.getElementById('gfNama').value;
+                const jabatan = document.getElementById('gfJabatan').value;
+                const foto = document.getElementById('gfFoto').value;
+
+                if (editId) {
+                    const idx = appData.organisasi.findIndex(x => x.id === editId);
+                    if (idx !== -1) appData.organisasi[idx] = { id: editId, nama, jabatan, foto };
+                } else {
+                    appData.organisasi.push({ id: `org_${Date.now()}`, nama, jabatan, foto });
+                }
+            } else if (type === 'siswa') {
+                const nama = document.getElementById('gfNama').value;
+                const gender = document.getElementById('gfGender').value;
+                const poin = parseInt(document.getElementById('gfPoin').value, 10) || 100;
+                const tanggalLahir = document.getElementById('gfTanggalLahir').value;
+                const hobi = document.getElementById('gfHobi').value;
+                const citaCita = document.getElementById('gfCita').value;
+                const bio = document.getElementById('gfBio').value;
+                const foto = document.getElementById('gfFoto').value;
+
+                const badgeCheckboxes = document.querySelectorAll('input[name="gfBadges"]:checked');
+                const lencana = Array.from(badgeCheckboxes).map(cb => cb.value);
+
+                if (editId) {
+                    const idx = appData.siswa.findIndex(x => x.id === editId);
+                    if (idx !== -1) appData.siswa[idx] = { id: editId, nama, gender, poin, lencana, tanggalLahir, hobi, citaCita, bio, foto };
+                } else {
+                    appData.siswa.push({ id: `s_${Date.now()}`, nama, gender, poin, lencana, tanggalLahir, hobi, citaCita, bio, foto });
+                }
+            } else if (type === 'album') {
+                const judul = document.getElementById('gfJudul').value;
+                const tipeMedia = document.getElementById('gfTipe').value;
+                const kategori = document.getElementById('gfKategori').value;
+                const tanggal = document.getElementById('gfTanggal').value;
+                const deskripsi = document.getElementById('gfDesc').value;
+                const url = document.getElementById('gfFoto').value;
+
+                if (editId) {
+                    const idx = appData.album.findIndex(x => x.id === editId);
+                    if (idx !== -1) appData.album[idx] = { id: editId, judul, tipeMedia, kategori, tanggal, deskripsi, url };
+                } else {
+                    appData.album.push({ id: `alb_${Date.now()}`, judul, tipeMedia, kategori, tanggal, deskripsi, url });
+                }
+            }
+
+            saveData();
+            closeGenericFormModal();
+            renderAdminLists();
+            showToast("Data berhasil disimpan!", "success");
+        }
+
+        function editItem(type, id) {
+            openFormModal(type, id);
+        }
+
+        function deleteItem(type, id) {
+            if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                if (type === 'organisasi') appData.organisasi = appData.organisasi.filter(x => x.id !== id);
+                else if (type === 'siswa') appData.siswa = appData.siswa.filter(x => x.id !== id);
+                else if (type === 'album') appData.album = appData.album.filter(x => x.id !== id);
+
+                saveData();
+                renderAdminLists();
+                showToast("Data berhasil dihapus", "info");
+            }
+        }
+
+        function openQuizQuestionModal(qId = null) {
+            activeEditQuizQId = qId;
+            const title = document.getElementById('quizQuestionModalTitle');
+            title.innerText = qId ? "Edit Soal Kuis" : "Tambah Soal Kuis";
+
+            if (qId && appData.quiz?.questions) {
+                const q = appData.quiz.questions.find(x => x.id === qId);
+                if (q) {
+                    document.getElementById('qqText').value = q.question;
+                    document.getElementById('qqOpt0').value = q.options[0] || '';
+                    document.getElementById('qqOpt1').value = q.options[1] || '';
+                    document.getElementById('qqOpt2').value = q.options[2] || '';
+                    document.getElementById('qqOpt3').value = q.options[3] || '';
+                    document.getElementById('qqCorrect').value = q.correctAnswer;
+                }
+            } else {
+                document.getElementById('qqText').value = '';
+                document.getElementById('qqOpt0').value = '';
+                document.getElementById('qqOpt1').value = '';
+                document.getElementById('qqOpt2').value = '';
+                document.getElementById('qqOpt3').value = '';
+                document.getElementById('qqCorrect').value = '0';
+            }
+
+            document.getElementById('quizQuestionModal').classList.remove('hidden');
+        }
+
+        function closeQuizQuestionModal() {
+            document.getElementById('quizQuestionModal').classList.add('hidden');
+        }
+
+        function handleQuizQuestionSubmit(e) {
+            e.preventDefault();
+            if (!appData.quiz) appData.quiz = { questions: [] };
+            if (!appData.quiz.questions) appData.quiz.questions = [];
+
+            const question = document.getElementById('qqText').value;
+            const options = [
+                document.getElementById('qqOpt0').value,
+                document.getElementById('qqOpt1').value,
+                document.getElementById('qqOpt2').value,
+                document.getElementById('qqOpt3').value,
+            ];
+            const correctAnswer = parseInt(document.getElementById('qqCorrect').value);
+
+            if (activeEditQuizQId) {
+                const idx = appData.quiz.questions.findIndex(x => x.id === activeEditQuizQId);
+                if (idx !== -1) {
+                    appData.quiz.questions[idx] = { id: activeEditQuizQId, question, options, correctAnswer };
+                }
+            } else {
+                appData.quiz.questions.push({
+                    id: `q_${Date.now()}`,
+                    question,
+                    options,
+                    correctAnswer
+                });
+            }
+
+            saveData();
+            closeQuizQuestionModal();
+            renderAdminLists();
+            showToast("Soal kuis berhasil disimpan!", "success");
+        }
+
+        function deleteQuizQuestion(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus soal kuis ini?")) {
+                appData.quiz.questions = appData.quiz.questions.filter(x => x.id !== id);
+                saveData();
+                renderAdminLists();
+                showToast("Soal kuis telah dihapus", "info");
+            }
+        }
+
+        function handleImageUpload(event, inputTargetId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(inputTargetId).value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') input.type = 'text';
+            else input.type = 'password';
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'bg-emerald-600 text-white',
+                error: 'bg-rose-600 text-white',
+                info: 'bg-navy-900 dark:bg-slate-800 text-white border border-slate-700'
+            };
+
+            toast.className = `px-4 py-3 rounded-2xl shadow-xl text-xs font-bold flex items-center space-x-2 transition-all transform translate-y-2 opacity-0 ${colors[type] || colors.info}`;
+            toast.innerHTML = `<span>${msg}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function initParticlesCanvas() {
+            const canvas = document.getElementById('particlesCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const particles = Array.from({ length: 40 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2 + 1,
+                dx: (Math.random() - 0.5) * 0.8,
+                dy: (Math.random() - 0.5) * 0.8,
+                o: Math.random() * 0.5 + 0.2
+            }));
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(14, 165, 233, ${p.o})`;
+                    ctx.fill();
+
+                    p.x += p.dx;
+                    p.y += p.dy;
+
+                    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+                });
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+        }
+
+        window.onload = function() {
+            initTheme();
+            loadData();
+            renderAll();
+            initParticlesCanvas();
+        };
+    </script>
+</body>
+</html>
